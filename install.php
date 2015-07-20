@@ -12,7 +12,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) die('require PHP > 5.3.0 !');
 //绑定安装模块
 define('BIND_MODULE','Install');
 
-define("PROJECT_NAME","20150606renren");
+define("PROJECT_NAME","201507shuiguo");
 
 // 是否调试模式
 define('APP_DEBUG', true);

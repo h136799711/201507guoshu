@@ -9,6 +9,7 @@
 namespace Admin\Controller;
 
 use Weixin\Api\WxreplyNewsApi;
+use Weixin\Api\WxreplyTextApi;
 
 class WxreplyNewsController extends  AdminController{
 	
@@ -25,7 +26,7 @@ class WxreplyNewsController extends  AdminController{
 		if($textKeywords['status']){
 			$keywords = $textKeywords['info'];
 		}
-		if($newsKeywords['status']){
+		if($newsKeywords['status'] && is_array($newsKeywords['info'])){
 			$keywords = array_merge($keywords,$newsKeywords['info']);
 		}
 		return $keywords;
@@ -43,7 +44,9 @@ class WxreplyNewsController extends  AdminController{
 			$this->assign("show",$result['info']['show']);
 			$this->assign("list",$result['info']['list']);
 			$this->display();
-		}
+		}else{
+            $this->error($result['info']);
+        }
 	}
 	
 	/**

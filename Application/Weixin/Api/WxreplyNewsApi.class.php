@@ -16,36 +16,36 @@ class WxreplyNewsApi extends Api{
     /**
      * 查询，不分页
      */
-    const QUERY_NO_PAGING = "Weixin/UserPicture/queryNoPaging";
+    const QUERY_NO_PAGING = "Weixin/WxreplyNews/queryNoPaging";
     /**
      * 查询包含图片
      */
-    const QUERY_WITH_PICTURE = "Weixin/UserPicture/queryWithPicture";
+    const QUERY_WITH_PICTURE = "Weixin/WxreplyNews/queryWithPicture";
     /**
      * 查询
      */
-    const QUERY = "Weixin/UserPicture/query";
+    const QUERY = "Weixin/WxreplyNews/query";
     /**
      * 添加
      */
-    const ADD = "Weixin/UserPicture/add";
+    const ADD = "Weixin/WxreplyNews/add";
     /**
      * 保存
      */
-    const SAVE = "Weixin/UserPicture/save";
+    const SAVE = "Weixin/WxreplyNews/save";
     /**
      * 查询一条数据
      */
-    const GET_INFO = "Weixin/UserPicture/getInfo";
+    const GET_INFO = "Weixin/WxreplyNews/getInfo";
     /**
      * 保存根据ID主键
      */
-    const SAVE_BY_ID = "Weixin/UserPicture/saveByID";
+    const SAVE_BY_ID = "Weixin/WxreplyNews/saveByID";
 
     /**
      * 删除
      */
-    const DELETE = "Weixin/UserPicture/delete";
+    const DELETE = "Weixin/WxreplyNews/delete";
     /**
      * 获取图文回复的所有不重复关键词
      */

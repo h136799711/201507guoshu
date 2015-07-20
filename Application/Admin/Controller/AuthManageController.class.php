@@ -8,6 +8,10 @@
 
 namespace Admin\Controller;
 
+use Admin\Api\AuthGroupApi;
+use Admin\Api\AuthRuleApi;
+use Admin\Api\MemberApi;
+
 class AuthManageController extends AdminController {
 
 	protected function _initialize() {
@@ -38,14 +42,14 @@ class AuthManageController extends AdminController {
 		$memberMap = array();
 		
 		//用户组
-		$result = apiCall("Admin/AuthGroup/queryNoPaging", array($map));
+		$result = apiCall(AuthGroupApi::QUERY_NO_PAGING, array($map));
 		
 		//模块
-		$modules = apiCall("Admin/AuthRule/allModules",array());
+		$modules = apiCall(AuthRuleApi::ALL_MODULES,array());
 		
 				
 		//访问权限节点
-		$authRules = apiCall("Admin/AuthRule/queryNoPaging", array($map_access, 'name asc', 'id,module,name,title'));
+		$authRules = apiCall(AuthRuleApi::QUERY_NO_PAGING, array($map_access, 'name asc', 'id,module,name,title'));
 		
 		if($modules['status']){
 			$this->assign("modulename",$modulename);
@@ -94,7 +98,7 @@ class AuthManageController extends AdminController {
 		$memberMap = array();
 
 		//用户组
-		$result = apiCall("Admin/AuthGroup/queryNoPaging", array($map));
+		$result = apiCall(AuthGroupApi::QUERY_NO_PAGING, array($map));
 		if ($result['status']) {
 			if ($groupid === -1) {
 				$groupid = $result['info'][0]['id'];
@@ -107,7 +111,7 @@ class AuthManageController extends AdminController {
 			$memberMap['group_id'] = $groupid;
 			//查询用户信息
 			//TODO:
-			$result = apiCall("Admin/Member/queryByGroup", array($memberMap, array('curpage' => I('p', 0), 'size' => 10)));
+			$result = apiCall(MemberApi::QUERY_BY_GROUP, array($memberMap, array('curpage' => I('p', 0), 'size' => 10)));
 			if ($result['status']) {
 				$this -> assign("show", $result['info']['show']);
 				$this -> assign("list", $result['info']['list']);

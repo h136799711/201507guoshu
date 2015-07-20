@@ -9,9 +9,38 @@
 namespace Admin\Api;
 
 use Admin\Model\AuthGroupModel;
+use Common\Api\Api;
 
-class AuthGroupApi extends \Common\Api\Api{
-	//初始化
+class AuthGroupApi extends Api{
+
+    /**
+     * 查询，不分页
+     */
+    const QUERY_NO_PAGING = "Admin/AuthGroup/queryNoPaging";
+    /**
+     * 添加
+     */
+    const ADD = "Admin/AuthGroup/add";
+    /**
+     * 保存
+     */
+    const SAVE = "Admin/AuthGroup/save";
+    /**
+     * 保存根据ID主键
+     */
+    const SAVE_BY_ID = "Admin/AuthGroup/saveByID";
+
+    /**
+     * 删除
+     */
+    const DELETE = "Admin/AuthGroup/delete";
+
+    /**
+     * 查询
+     */
+    const QUERY = "Admin/AuthGroup/query";
+
+    //初始化
 	protected function _init(){
 		$this->model = new AuthGroupModel();
 	}

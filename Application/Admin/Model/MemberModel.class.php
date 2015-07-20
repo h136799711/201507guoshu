@@ -37,5 +37,32 @@ class MemberModel extends Model {
     public function getLongIp(){
         return ip2long(get_client_ip());
     }
-	
+
+
+    public function queryByGroup($map,$page){
+        $l_table = $this->tablePrefix.'member';
+        $r_table = $this->tablePrefix.'auth_group_access';
+        $fields = "m.uid,m.nickname,m.last_login_time,m.last_login_ip,m.status";
+        $groupid = $map['group_id'];
+        $map = array('a.group_id'=>$groupid,'m.status'=>array('egt',0));
+        $order = 'm.uid asc';
+        $model    = M()->table( $l_table.' m' )->join ( $r_table.' a ON m.uid=a.uid' );
+        $list = $model -> field($fields) -> where($map) -> order($order) -> page($page['curpage'] . ',' . $page['size']) -> select();
+        if ($list === false) {
+            $error = $this -> model -> getDbError();
+            return $this -> apiReturnErr($error);
+        }
+
+        $count = M()->query('SELECT count(m.uid) FROM common_member m INNER JOIN common_auth_group_access a ON m.uid=a.uid WHERE a.group_id = '.$groupid.' AND m.status >= 0 ORDER BY m.uid asc LIMIT '.$page['curpage'].','.$page['size']);
+        $count = $count[0]['count(m.uid)'];
+
+        // 查询满足要求的总记录数
+        $Page = new \Think\Page($count, $page['size']);
+
+        // 实例化分页类 传入总记录数和每页显示的记录数
+        $show = $Page -> show();
+
+        return array("show" => $show, "list" => $list);
+    }
+
 }
