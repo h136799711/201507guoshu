@@ -1,0 +1,77 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	<link rel="stylesheet" type="text/css" media="all" href="__CSS__/wxshop.css">
+	<link type="text/css" rel="stylesheet" href="__CDN__/comp/wxuploader.css?v=__APP_VERSION__" />
+	<link type="text/css" rel="stylesheet" href="__CDN__/jquery-uploadify/3.2.1/uploadify.css" />
+	<script type="text/javascript" src="__CDN__/jquery-uploadify/3.2.1/jquery.uploadify.min.js"></script>
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+			<div style="background: #ffffff;padding:10px">
+			<!-- 图片选择DOM结构 -->
+			<div class="wxuploaderimg clearfix" data-maxitems="1">
+				<div class="img-preview clearfix" >
+					
+				</div>
+				<div class="add">
+					<i class="fa fa-plus"></i>
+				</div>
+			</div>
+			
+			<!-- 图片选择DOM结构 -->
+			
+			<!-- 图片选择DOM结构 编辑 -->
+			
+			<div class="wxuploaderimg clearfix <notempty name="wxaccount.qrcode">checked</notempty>" data-maxitems="1">
+				<div class="img-preview clearfix" >
+					<notempty name="wxaccount.qrcode">
+							<div class="pull-left clearfix img-item">
+								<img src="{$wxaccount.qrcode}" />
+								<div class="edit_pic_wrp"><a href="javascript:;" class="fa fa-lg fa-trash js_delete"></a></div>
+							</div>
+					</notempty>
+				</div>
+				<div class="add">
+					<i class="fa fa-plus"></i>
+				</div>
+			</div>
+			
+			<!-- 图片选择DOM结构 -->
+			
+			
+			
+			<!-- 图片选择DOM结构 -->
+			<div class="wxuploaderimg clearfix" data-maxitems="4">
+				<div class="img-preview clearfix" >
+					
+				</div>
+				<div class="add">
+					<i class="fa fa-plus"></i>
+				</div>
+			</div>
+			
+			<!-- 图片选择DOM结构 -->
+			
+			
+			</div>
+			
+			<include file="template/wxpicture" />
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function(){			
+			wxuploadimg.init({cont:".wxuploaderimg"});
+		})
+	</script>
+</block>

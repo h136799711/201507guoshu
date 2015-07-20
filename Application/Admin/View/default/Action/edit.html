@@ -1,0 +1,102 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+
+			<div class="main-title cf">
+				<h2>编辑行为</h2>
+			</div>
+			<!-- 表单 -->
+			<form id="form" action="__SELF__" method="post" class="actionForm form-horizontal">
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2 col-md-2">&nbsp;
+					</label>
+					<div class="col-lg-10 col-md-10">
+						<button type="submit" class="btn btn-primary btn-sm submit-btn ajax-post" target-form="actionForm">确 定</button>
+						<button class="btn btn-return btn-default btn-sm " onclick="javascript:history.back(-1);return false;">返 回</button>
+					</div>
+				</div>
+				
+				<div class="form-group cf">
+					<label class="control-label col-lg-2 col-md-2">行为标识<span class="check-tips">（输入行为标识 英文字母）</span>
+					</label>
+					<div class="col-lg-10 col-md-10">
+						<input type="text" class="form-control input-large" placeholder="行为标识" name="name" value="{$vo.name}">
+						<div class="help-block">必须为英文或拼音，且唯一</div>
+					</div>
+				</div>
+				
+				<div class="form-group cf">
+					<label class="control-label col-lg-2 col-md-2">行为名称<span class="check-tips">（输入行为名称）</span>
+					</label>
+					<div class="col-lg-10 col-md-10">
+						<input type="text" class="form-control input-large" placeholder="行为名称" name="title" value="{$vo.title}">
+						<div class="help-block">行为的可读式名称</div>
+					</div>
+				</div>
+				
+				<div class="form-group cf">
+					<label class="control-label col-lg-2 col-md-2">行为类型<span class="check-tips">（选择行为类型）</span>
+					</label>
+					<div class="col-lg-10 col-md-10">
+						<select name="type" class="form-control">
+							<volist name=":get_action_type(null,true)" id="vo_type">
+								<option value="{$key}" <eq name="vo_type['type']" value="$key" >selected="selected"</eq> >{$vo_type}</option>
+							</volist>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group cf">
+					<label class="control-label col-lg-2 col-md-2">行为描述<span class="check-tips">（输入行为描述）</span>
+					</label>
+					<div class="col-lg-10 col-md-10">
+						<textarea name="remark" rows="3" class="form-control">{$vo.remark}</textarea>
+					</div>
+				</div>
+				
+				<div class="form-group cf">
+					
+					<label class="control-label col-lg-2 col-md-2">
+						行为规则<span class="check-tips">（输入行为规则，不写则只记录日志）</span>
+					</label>
+					
+					<div class="col-lg-10 col-md-10">
+						<textarea name="rule" rows="3" class="form-control">{$vo.rule}</textarea>
+					</div>
+				</div>
+				<div class="form-group cf">
+					<label class="control-label col-lg-2 col-md-2">日志规则
+					</label>
+					<div class="col-lg-10 col-md-10">
+						<textarea name="log" rows="3" class="form-control">{$vo.log}</textarea>
+						<span class="help-block">（记录日志备注时按此规则来生成，支持[变量|函数]。目前变量有：user,time,model,record,data）</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2 col-md-2">&nbsp;
+					</label>
+					<div class="col-lg-10 col-md-10">
+						<button type="submit" class="btn btn-primary btn-sm submit-btn ajax-post" target-form="actionForm">确 定</button>
+						<button class="btn btn-return btn-default btn-sm " onclick="javascript:history.back(-1);return false;">返 回</button>
+					</div>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+</block>
+
+<block name="area_footer">
+
+</block>

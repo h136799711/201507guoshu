@@ -1,0 +1,138 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	<link rel="stylesheet" type="text/css" href="__CDN__/comp/wxuploader.css" />
+	<link type="text/css" rel="stylesheet" href="__CDN__/jquery-uploadify/3.2.1/uploadify.css" />
+	<script type="text/javascript" src="__CDN__/jquery-uploadify/3.2.1/jquery.uploadify.min.js"></script>
+		<style type="text/css">
+		.banner.wxuploaderimg {
+			width: 320px;
+			height: 100px;
+		}
+		.banner.wxuploaderimg .img-preview img{
+			width: 320px;			
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" media="all" href="__CDN__/jquery-datetimepicker/jquery.datetimepicker.css">
+	<script type="text/javascript" src="__CDN__/jquery-datetimepicker/jquery.datetimepicker.js"></script>
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+			
+			<!-- 带验证 form -->
+			<form class="form-horizontal well validateForm">
+				<fieldset>
+					<legend>
+						广告添加
+					</legend>
+					<div class="form-group">
+						<label for="inputtitle" class="col-md-2 col-lg-2 control-label">广告展示的时间段</label>
+						<div class="col-md-10 col-lg-10">
+							
+							<div class="input-group" style="  width: 560px;">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<input type="text" name="startdatetime" id="startdatetime" class="form-control input-short" value="{:date('Y-m-d',time())}" />
+								<div class="input-group-addon">
+									<i class="fa fa-long-arrow-right"></i>
+								</div>
+								<input type="text" name="enddatetime" id="enddatetime" class="form-control input-short" value="{:date('Y-m-d',time()+7*24*3600)}" />
+							</div>
+							<div class="help-block">(广告展示的时间段,默认7天)</div>
+						</div>
+					</div>
+                    <div class="form-group">
+                        <label for="inputtitle" class="col-md-2 col-lg-2 control-label">广告位置</label>
+                        <div class="col-md-10 col-lg-10">
+                                <select name="position" class="form-control  input-normal" >
+                                    {:W("Partials/datatree",array(getDatatree('ADVERT_POSITION'),true))}
+                                </select>
+                                <div class="help-block">(选择位置)</div>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<label for="inputtitle" class="col-md-2 col-lg-2 control-label">广告标题</label>
+						<div class="col-md-10 col-lg-10">
+							<input type="text" class="required form-control input-short" name="title" id="title" placeholder="请给广告起个标题或默认">
+							<div class="help-block">(给广告起个标题或默认)</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputtitle" class="col-md-2 col-lg-2 control-label">广告图片地址</label>
+						<div class="col-md-10 col-lg-10">
+							<input type="hidden" class="" name="img" id="img" placeholder="">
+							<!-- 图片选择DOM结构 -->
+							<div class="wxuploaderimg clearfix advert" data-maxitems="1">
+								<div class="img-preview clearfix" >
+									
+								</div>
+								<div class="add">
+									<i class="fa fa-plus"></i>
+								</div>
+							</div>
+							<!-- 图片选择DOM结构 -->
+							
+							<div class="help-block">(上传图片,大尺寸：320像素*200像素，小尺寸：160像素*100像素 )</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputtitle" class="col-md-2 col-lg-2 control-label">点击图片跳转链接<br/>(选填)</label>
+						<div class="col-md-10 col-lg-10">
+							<input name="url" class="form-control" type="text" />							
+							<div class="help-block">(点击图片跳转链接，完整的链接地址)</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputtitle" class="col-md-2 col-lg-2 control-label">广告描述<br/>（选填）</label>
+						<div class="col-md-10 col-lg-10">
+							<textarea name="notes" class="form-control" rows="5"></textarea>							
+							<div class="help-block">(广告描述)</div>
+						</div>
+					</div>
+	
+					<div class="form-group">
+						<label class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+						<div class="col-lg-10 col-md-10">
+							<a target-form="validateForm" onclick="getData();" class="ajax-post btn btn-primary" href="{:U('Admin/Advert/add')}" autofocus="autofocus"><i class="fa fa-save"></i>保存</a>
+							<a class="btn btn-default" href="{:U('Admin/Advert/index')}">
+								<i class="fa fa-reply"></i>								返回</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<!-- form -->
+			<include file="template/wxpicture" />
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+	function getData(){
+		var img = $(".wxuploaderimg img").attr("src");
+		$("#img").val(img);
+	}
+	
+	$(function(){
+			$('#startdatetime').datetimepicker({
+				lang: 'ch',
+				format:'Y-m-d',
+				timepicker:false,
+			});
+			$('#enddatetime').datetimepicker({
+				lang: 'ch',
+				format:'Y-m-d',
+				timepicker:false,
+			});
+			wxuploadimg.init({cont:".wxuploaderimg"});
+	});
+	</script>
+</block>

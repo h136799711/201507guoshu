@@ -1,0 +1,65 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+			<div>
+				<form class="">
+					<legend>用户信息查看</legend>
+                    <div class="form-group  col-lg-12 col-md-12">
+                        <label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+                        <div class="col-lg-10 col-md-10">
+                            <a class="btn btn-sm btn-primary"  href="javascript:history.back(-1);"><i class="fa fa-reply"></i>返回</a>
+                        </div>
+                    </div>
+					<div class="form-group  col-lg-12 col-md-12">
+						<label class="control-label col-lg-2 col-md-2">会员昵称</label>
+						<div class="col-lg-10 col-md-10">
+							<img style="width:80px;" src="{$vo.avatar}" /> {$vo.nickname}
+						</div>
+					</div>
+
+					<div class="form-group   col-lg-12 col-md-12">
+						<label class="control-label col-lg-2 col-md-2">性别</label>
+						<div class="col-lg-10 col-md-10">
+							{:($vo['sex'] == 0?"女":"男")}
+						</div>
+					</div>
+					
+					<div class="form-group   col-lg-12 col-md-12">
+						<label class="control-label col-lg-2 col-md-2">地址信息</label>
+						<div class="col-lg-10 col-md-10">
+							{$vo.country}{$vo.province}{$vo.city}
+						</div>
+					</div>
+					
+					<div class="form-group col-lg-12 col-md-12">
+						<label class="control-label col-lg-2 col-md-2">关注时间</label>
+						<div class="col-lg-10 col-md-10">
+							{$vo.subscribe_time|date='Y-m-d H:i:s',###}
+						</div>
+					</div>
+                    <div class="form-group  col-lg-12 col-md-12">
+                        <label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+                        <div class="col-lg-10 col-md-10">
+                            <a class="btn btn-sm btn-primary" href="javascript:history.back(-1);"><i class="fa fa-reply"></i>返回</a>
+                        </div>
+                    </div>
+				</form>
+			</div>
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+
+</block>

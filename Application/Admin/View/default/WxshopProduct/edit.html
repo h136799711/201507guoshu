@@ -1,0 +1,242 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	<link rel="stylesheet" type="text/css" media="all" href="__CSS__/wxshop.css">
+	<link type="text/css" rel="stylesheet" src="__CDN__/jquery-uploadify/3.2.1/uploadify.css" />
+	<script type="text/javascript" src="__CDN__/jquery-uploadify/3.2.1/jquery.uploadify.min.js"></script>
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+
+			<div class="col-main">
+				<div class="main-hd">
+					<h2>编辑商品</h2>
+				</div>
+				<div class="main-bd clearfix">
+					<form class="productForm form-horizontal" method="post">
+						<input type="hidden" name="id" value="{$vo.id}" />
+						<input type="hidden" name="main_img" id="main_img" value="{$vo.main_img}" />
+						<input type="hidden" name="img" id="img" value="{$vo.img}" />
+						<input type="hidden" name="storeid" value="{$vo.storeid}" />
+						<h3><i>●</i>基本信息</h3>
+						
+						<div class="form-group col-lg-12 col-md-12 clearfix">
+							<label for="" class="control-label col-lg-2 col-md-2">商品名称</label>
+							<div class="col-lg-10 col-md-10">
+								<input name="product_name" maxlength="60" value="{$vo.name}" class="js_product_name form-control input-normal input-sm" />
+								<span class="help-block">限30个字</span>
+							</div>
+						</div>
+						
+						<div class="form-group col-lg-12 col-md-12 clearfix">
+							<label for="" class="control-label col-lg-2 col-md-2">商品图片</label>
+							<div class="col-lg-10 col-md-10">
+								主图<span class="text-muted">(建议尺寸为640像素*640像素，大小不超过500kb)<i data-toggle="tooltip" class="fa fa-question" title="商品主图将会作为商品的默认图片出现在货架及商品详情页。"></i></span>
+								<!-- 图片选择DOM结构 -->
+								<div class="wxuploaderimg main_img clearfix <notempty name="vo.main_img">checked</notempty>"  data-maxitems="1">
+									<div class="img-preview clearfix" >
+										<notempty name="vo.main_img">
+											<div class="pull-left clearfix img-item">
+												<img src="{$vo.main_img}" />
+												<div class="edit_pic_wrp"><a href="javascript:;" class="fa fa-lg fa-trash js_delete"></a></div>
+											</div>
+										</notempty>
+									</div>
+									<div class="add">
+										<i class="fa fa-plus"></i>
+									</div>
+								</div>
+								
+								<!-- 图片选择DOM结构 -->
+							</div>
+						</div>
+						
+						<div class="form-group col-lg-12 col-md-12 clearfix">
+							<label for="" class="control-label col-lg-2 col-md-2">&nbsp;</label>
+							<div class="col-lg-10 col-md-10">
+								其他图片<span class="text-muted">(选传，单张图片大小不超过500kb，最多10张)<i class="fa fa-question" data-toggle="tooltip" title="将出现在商品图片库，方便用户更好的了解您的商品。"></i></span>
+								<!-- 图片选择DOM结构 -->
+								<div class="wxuploaderimg clearfix product-imglist "  data-maxitems="10">
+									<div class="img-preview clearfix" <if condition="count($imgs) gt 0">style="display:inline-block;"</if>>										
+										<if condition="count($imgs) gt 0">
+											<volist name="imgs" id="one">
+											<div class="pull-left clearfix img-item">
+												<img src="{$one}" alt="image" />
+												<div class="edit_pic_wrp"><a href="javascript:;" class="fa fa-lg fa-trash js_delete"></a></div>
+											</div>
+											</volist>
+										</if>
+									</div>
+									<div class="add" <if condition="count($imgs) eq 10">style="display:none;"</if> >
+										<i class="fa fa-plus"></i>
+									</div>
+								</div>
+								
+								<!-- 图片选择DOM结构 -->
+							</div>
+						</div>
+						<div class="form-group col-lg-12 col-md-12 clearfix js_frm_gp_sku">
+							<label for="" class="control-label col-lg-2 col-md-2">微信价</label>
+							<div class="col-lg-10 col-md-10">
+								<input name="price" class="price form-control input-short input-sm" value="{:($vo['price']/100.0)}" />元
+								<span class="help-block">销售价,需低于原价</span>
+							</div>
+						</div>
+						<div class="form-group col-lg-12 col-md-12 clearfix js_frm_gp_sku">
+							<label for="" class="control-label col-lg-2 col-md-2">原价
+								<br/><span class="help-block">(选填)</span>
+							</label>
+							<div class="col-lg-10 col-md-10">
+								<input name="ori_price" maxlength="60"  value="{:($vo['ori_price']/100.0)}"  class="oriprice form-control input-short input-sm" />元
+								<span class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group col-lg-12 col-md-12 clearfix js_frm_gp_sku">
+							<label for="" class="control-label col-lg-2 col-md-2 ">商品库存
+								<br/><span class="help-block"></span>
+							</label>
+							<div class="col-lg-10 col-md-10">
+								<input name="quantity" maxlength="60"  value="{$vo.quantity}"  class="oriprice form-control input-short input-sm" />
+								<span class="help-block"></span>
+							</div>
+						</div>
+						
+						<div class="form-group col-lg-12 col-md-12 clearfix js_frm_gp_buylimit">
+							<label for="" class="control-label col-lg-2 col-md-2">是否限购</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="radio-inline">
+									<input type="radio" name="isbuylimit" <eq name="vo['buy_limit']" value="0">checked="checked"</eq> value="0">不限购
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="isbuylimit" <neq name="vo['buy_limit']" value="0">checked="checked"</neq> value="1">限购
+								</label>
+
+								<input type="text" style="width: 100px;" name="buylimit" value="{$vo.buy_limit}"  class="<eq name="vo['buy_limit']" value="0">hidden</eq> input-sm" />
+							</div>
+						</div>
+										
+						<h3 class="pull-left"><i>●</i>售后信息</h3>
+
+						<div class="form-group col-lg-12 col-md-12 clearfix">
+							<label for="" class="control-label col-lg-2 col-md-2">发票</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="radio-inline">
+									<input type="radio" name="ishasreceipt" <eq name="vo['attrext_ishasreceipt']" value="0">checked="checked"</eq> value="0">无
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="ishasreceipt" <eq name="vo['attrext_ishasreceipt']" value="1">checked="checked"</eq> value="1">有
+								</label>
+
+							</div>
+						</div>
+						
+						<div class="form-group col-lg-12 col-md-12 clearfix">
+							<label for="" class="control-label col-lg-2 col-md-2">保修</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="radio-inline">
+									<input type="radio" name="isunderguaranty" <eq name="vo['attrext_isunderguaranty']" value="0">checked="checked"</eq>  checked="checked" value="0">无
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="isunderguaranty" <eq name="vo['attrext_isunderguaranty']" value="1">checked="checked"</eq>  value="1">有
+								</label>
+
+							</div>
+						</div>
+						
+						<div class="form-group col-lg-12 col-md-12 clearfix">
+							<label for="" class="control-label col-lg-2 col-md-2">退换货</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="radio-inline">
+									<input type="radio" name="issupportreplace" <eq name="vo['attrext_issupportreplace']" value="0">checked="checked"</eq>   value="0">不支持
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="issupportreplace" <eq name="vo['attrext_issupportreplace']" value="1">checked="checked"</eq>   value="1">支持
+								</label>
+
+							</div>
+
+						</div>
+
+						<div class="form-group col-lg-12 col-md-12 clearfix tool-bar text-center border">
+							<a target-form="productForm" href="{:U('Admin/WxshopProduct/edit')}" onclick="return check();"  class="ajax-post btn btn-primary" id="js_submit"><i class="fa fa-check"></i>确定</a>
+							<a href="{:U('Admin/WxshopProduct/index',array('storeid'=>$vo['storeid']))}" class="btn btn-default"><i class="fa fa-reply"></i>返回</a>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<include file="template/wxpicture" />
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript" ></script>
+	
+	
+	<script type="text/javascript">
+		window.ServicesURL = {
+			groupGetAll:"{:U('Admin/WxshopGroup/groups')}",	
+			groupAdd:"{:U('Admin/WxshopGroup/add')}",	
+			cateAllProp:"{:U('Admin/WxshopProduct/cateAllProp')}",	
+			skulist:"{:U('Admin/WxshopProduct/skulist')}",	
+		};
+	</script>
+	<script type="text/javascript">
+		function getData(){
+			
+			var main_img = $(".main_img .img-preview img").attr("src");
+			if(main_img){
+				$("#main_img").val(main_img);
+			}
+			
+			$("#img").val("");
+			$(".product-imglist .img-preview img").each(function(index,item){
+				$("#img").val($("#img").val()+$(item).attr("src")+",");
+			});
+		}
+		
+		
+		function check(){
+			getData();
+			var txt = $(".js_product_name").val();
+			var len = txt.replace(/[^\x00-\xff]/g, 'xx').length ; 
+			if(len == 0){					
+				$.scojs_message('商品名称必须填写', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			if(len > 30){
+				$.scojs_message('商品名称不能超过30个字', $.scojs_message.TYPE_ERROR);
+				return false;
+			}
+			return true;
+		}
+	
+		$(function() {
+			
+			//图片上传
+			wxuploadimg.init({cont:".wxuploaderimg"});
+			//
+			$(".js_frm_gp_buylimit input[type=radio]").click(function(){
+				console.log($(this).val());
+				console.log($(".js_frm_gp_buylimit input[type=text]"));
+				if($(this).val() == 1){
+					$(".js_frm_gp_buylimit input[type=text]").removeClass("hidden");
+				}else{
+					$(".js_frm_gp_buylimit input[type=text]").addClass("hidden");
+				}
+			});
+			
+			
+		})
+		
+	</script>
+	
+</block>

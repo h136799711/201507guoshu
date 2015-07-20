@@ -1,0 +1,32 @@
+1. 属性观察者
+    willSet,//正要被更改
+    didSet //属性被更改
+2. lazy 关键词
+    被使用前不初始化
+3. 初始化
+
+    结构体会默认有 init 方法。
+
+
+
+4. AnyObject
+
+
+    Casting AnyObject //转换anyObject 使用 as
+    例子:
+    .let calcVC ＝ destinationViewController as CalculatorViewController
+
+    防止崩溃的情况下，请使用as?
+
+     if  let =  calcVC as? "";
+
+     is 关键词
+
+
+
+5. NSUserDefault
+
+
+6. IBInspectable
+
+ 可在编辑器中编辑

@@ -1,0 +1,54 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+<style type="text/css">
+    .float-circle.list-group .list-group-item{
+        width: 100px;
+        border-radius: 50%;
+        height: 100px;
+        text-align: center;
+        float:left;
+        padding: 0px;
+    }
+
+    .float-circle.list-group .list-group-item a{
+        line-height: 100px;
+        display: block;
+        height: 100px;
+    }
+    .float-circle.list-group .list-group-item a:hover{
+        text-decoration: none;
+        background: #f0005e;
+        color: #FFFFFF;
+        border-radius: 50%;
+        -webkit-transition: background-color 1s;
+        -moz-transition: background-color 1s;
+        -ms-transition: background-color 1s;
+        -o-transition: background-color 1s;
+        transition: background-color 1s;
+    }
+</style>
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+        {:W('Menus/left')}
+		<div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+            <div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+
+            <ul class="list-group float-circle clearfix">
+                <li class="list-group-item"><a href="{:U('Admin/Withdraw/verify')}">待审核<span class="badge">12</span></a></li>
+            </ul>
+
+            </div>
+		</div>
+
+	</div>
+</block>
+
+<block name="area_footer">
+
+</block>

@@ -1,0 +1,115 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	<style type="text/css">
+		html{
+			font-size: 12px;
+		}
+		body{
+			overflow: hidden;
+		}
+		.background{
+			background:url(__IMG__/bg001.jpg?v=1.0) no-repeat 50% 50%;
+			background-size: cover;
+			
+		}
+		.category-list{
+			position:absolute;
+			left:0px;
+			width: 100%;
+			left: 0px;
+			top: 10%;
+			padding-top: 20%;
+			height: 50%;
+		}
+		.category-list .category-item a{
+			width: 72px;
+			height: 72px;
+			display: block;
+			margin: 0 auto;
+			line-height: 32px;
+			color:#000;
+			font-weight: bold;
+			border-radius: 50%;
+			background: #FFFFFF;
+			background: rgba(240, 235, 235, 0.74);
+		}
+		.category-list .category-item{
+			  width: 33%;
+			  padding: 1rem;
+			  font-size: 12px;
+			  text-align: center;
+		}
+		
+		.category-item img{
+			width:24px;
+			height:24px;
+		}
+		
+		@media only screen (min-width: 480px) {
+			.category-list .category-item a{
+			  width: 96px;
+			  height: 96px;
+			  margin: 0px 10px;
+			}
+			.category-item img{
+				width:32px;
+				height:32px;
+			}
+			.category-list{
+				top: 10%;
+				height: 70%;
+			}
+		}
+		
+		@media only screen (min-width: 320px) {
+			
+			.category-list .category-item a{
+			  width: 72px;
+			  height: 72px;
+			  margin: 0px 5px;
+			}
+			.category-item img{
+				width:24px;
+				height:24px;
+			}
+			.category-list{
+				top: 10%;
+				height: 70%;
+			}
+		}
+		
+	</style>
+	
+</block>
+
+
+<block name="area_body">
+	
+	<div class="background">
+		
+		<div class="category-list am-cf">
+			<volist name="cates" id="vo">
+				<div class="category-item am-fl">
+				<a href="{:U('Cms/Post/cate',array('cateid'=>$vo['id']))}">
+					<img src="{$vo.iconurl}" class="am-responsive-width am-circle" alt="icon" />
+					<div>
+						{$vo.name}
+					</div>
+				</a>
+				</div>
+			</volist>
+		</div>
+		
+	</div>
+	
+</block>
+
+<block name="area_footer">
+	<script>
+	$(function(){
+		$(".background").height($(window).height());
+	})
+	</script>
+</block>
+	

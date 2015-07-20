@@ -1,0 +1,26 @@
+Admin模块
+//=========================================================
+//登录时
+//存入 session
+session('global_user_sign', data_auth_sign($user));//用户信息加密后
+session('global_user', $user);//用户信息
+session("uid", $user['id']);//用户ID
+
+//当前登录的模块
+session("LOGIN_MOD", MODULE_NAME);
+
+//后台登录后：AdminController里
+session("wxaccount");//当前公众号信息
+session("wxaccountid");//当前公众号ID
+session("appid");//当前公众号APPID
+session("appsecret");//当前公众号APPSECRET
+session("CURRENT_USER_" . UID . "_MENU");//当前用户可视菜单
+
+
+Shop模块
+//=========================================================
+
+session('storeid',当前访问公众号ID) //当前访问用户信息
+session('global_user') //当前访问用户信息
+
+

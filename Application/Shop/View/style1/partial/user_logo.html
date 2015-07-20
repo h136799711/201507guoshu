@@ -1,0 +1,17 @@
+<div class="user-banner">
+    <img class="am-responsive-width" src="__IMG__/user-banner/banner.jpg" alt="banner" />
+</div>
+<div class="logo-wrp" >
+    <div class="user-logo am-inline-block">
+        <img class="" src="{$userinfo.avatar}" alt="logo" />
+        <span class="logo-circle"></span>
+    </div>
+    <div class="username">
+        <span >{$userinfo.nickname}的店铺</span>
+			<span class="rank">
+				<for start="0" end="$rank['loop']">
+                    <i class="rank rank-{$rank['type']}"></i>
+                </for>
+			</span>
+    </div>
+</div>

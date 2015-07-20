@@ -1,0 +1,124 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/localization/messages_zh.min.js"></script>
+
+	<style type="text/css">
+		input.error {
+			border: 1px solid red;
+		}
+		
+		label.checked {
+			
+			padding-left: 25px;
+		}
+		
+		label.error {
+			padding-left: 25px;
+			padding-bottom: 2px;
+			font-weight: bold;
+			color: #EA5200;
+		}
+	</style>
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+			<!-- 带验证 form -->
+			<form id="registerForm" class="form-horizontal well validateForm">
+				<fieldset>
+					<legend>
+						用户信息查看</legend>
+					<div class="form-group">
+						<label for="btns" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+						<div class="col-lg-10 col-md-10">
+							<a class="btn btn-default btn-sm" href="javascript:history.back(-1);"><i class="fa fa-reply"></i>返回</a>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="inputusername" class="col-md-2 col-lg-2 control-label">用户登录账号</label>
+						<div class="col-md-10 col-lg-10">
+							<div class="h4">{$useraccount.username}</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="inputusername" class="col-md-2 col-lg-2 control-label">用户昵称</label>
+						<div class="col-md-10 col-lg-10">
+							<div class="h4">{$userinfo.nickname}</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputemail" class="col-md-2 col-lg-2 control-label">性别</label>
+						<div class="col-md-10 col-lg-10">
+							<div class="h4">	{:($userinfo.sex == 0 ? "女":"男")}</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputemail" class="col-md-2 col-lg-2 control-label">注册时间</label>
+						<div class="col-md-10 col-lg-10">
+							<div class="h4">	{$userinfo['reg_time']|date='Y-m-d H:i:s',###}</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputemail" class="col-md-2 col-lg-2 control-label">最后登录时间</label>
+						<div class="col-md-10 col-lg-10">
+							<div class="h4">	{$userinfo['last_login_time']|date='Y-m-d H:i:s',###}</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputemail" class="col-md-2 col-lg-2 control-label">用户拥有的角色</label>
+						<div class="col-md-10 col-lg-10">
+								<table class="table table-bordered" >
+									<thead>
+										<tr>
+											<th>角色名</th>
+											<th>角色权限描述</th>
+										</tr>
+									</thead>
+									<tbody>								
+									<volist name="userroles" id="vo">
+											<tr>
+													<td>{$vo['title']}</td>
+													<td>{$vo['notes']}</td>
+											</tr>
+									</volist>
+									</tbody>
+								</table>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="btns" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+						<div class="col-lg-10 col-md-10">
+							<a class="btn btn-default btn-sm" href="javascript:history.back(-1);"><i class="fa fa-reply"></i>返回</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<!-- form -->
+			
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+
+	<script type="text/javascript">
+		$(function() {
+
+		}); //end ready
+	</script>
+
+</block>

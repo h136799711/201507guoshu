@@ -1,0 +1,68 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+			
+			<!-- 表单 -->
+			<form id="form" method="post" class="form-horizontal doc-modal-form">
+				
+				<div class="form-group cf">
+					<label class=" col-lg-2 col-md-2">行为名称</label>
+					<div class="col-lg-10 col-md-10">
+						<span>{:get_action($info['action_id'], "title")}</span>
+					</div>
+				</div>
+
+				<div class="form-group cf">
+					<label class=" col-lg-2 col-md-2">执行者</label>
+					<div class="col-lg-10 col-md-10">
+						<span>{:get_nickname($info['user_id'])}</span>
+					</div>
+				</div>
+
+				<div class="form-group cf">
+					<label class=" col-lg-2 col-md-2">执行IP</label>
+					<div class="col-lg-10 col-md-10">
+						<span>{:long2ip($info['action_ip'])}</span>
+					</div>
+				</div>
+
+				<div class="form-group cf">
+					<label class=" col-lg-2 col-md-2">执行时间</label>
+					<div class="col-lg-10 col-md-10">
+						<span class="">{:date('Y-m-d H:i:s',$info['create_time'])}</span>
+					</div>
+				</div>
+
+				<div class="form-group cf">
+					<label class=" col-lg-2 col-md-2">备注</label>
+					<div class="col-lg-10 col-md-10   ">{$info.remark}
+					</div>
+				</div>
+
+				<!-- 按钮 -->
+				<div class="form-group cf">
+					<label class=" col-lg-2 col-md-2">&nbsp;</label>
+					<div class=" col-lg-10 col-md-10 edit_sort_btn">
+						<button class="btn btn-return" onclick="javascript:history.back(-1);return false;"><i class="fa fa-reply"></i>返 回</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript" src="__STATIC__/jquery.dragsort-0.5.1.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	</script>
+</block>

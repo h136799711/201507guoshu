@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="utf-8">
+		<title>{:C('WEBSITE_TITLE')}</title>
+		<meta name="keywords" content="{$seo.keywords|default=" "}" />
+		<meta name="description" content="{$seo.description|default=" "}" />
+		<meta name="author" content="{$cfg.owner|default=" Gooraye "}" />
+	    <meta content="yes" name="apple-mobile-web-app-capable" />
+	    <meta content="yes" name="apple-touch-fullscreen" />
+	    <meta content="telephone=no,email=no" name="format-detection" />
+	    <meta content="maximum-dpr=2" name="flexible" />
+	    <meta content="modeName=640-12" name="grid" />
+		<!-- 系统基本样式 -->
+		<link type="text/css" rel="stylesheet" href="__CDN__/amazeui/2.3.0/css/amazeui.min.css" />
+		
+		<!-- 商城全局样式 -->
+		<link type="text/css" rel="stylesheet" href="__CSS__/shop.css?v=__APP_VERSION__" />
+		<link type="text/css" rel="stylesheet" href="__CSS__/shop-dpr2.css?v=__APP_VERSION__" />
+		
+		<!-- 脚本 -->
+		<script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="__CDN__/amazeui/2.3.0/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="__CDN__/common/mobile.js?v=__APP_VERSION__"></script>
+		
+
+	<style type="text/css">
+		
+		html{
+			font-size: 14px;		
+		}
+		body{
+			overflow-x: hidden;
+		}
+		.start-page{
+			width: 100%;
+			height: 1008px;
+			max-height: 1200px;
+			position: absolute;
+			z-index: 100000;
+		}
+		
+		.start-page img{
+			height:100%;
+			width: 100%;
+		}
+		
+		.product-list{			
+			width:100%;
+			box-sizing: border-box;
+			margin: 0.2rem 0;
+			text-align: center;
+		}
+		.product-list .product-wrp{
+			display: inline-block;
+			padding: 10px;
+		}
+		
+		.product-list .product-item{
+			padding: 10px;
+			border-radius: 8px;
+		    padding-bottom: 2px;
+			height: 100%;
+			box-sizing: border-box;
+			position: relative;
+			background-color: #FFFFFF;
+			overflow: hidden;
+		}
+		.product-list .p-price{
+			box-sizing: border-box;
+			border-top: 1px dashed #ddd;
+			height: 1.4rem;
+			line-height: 1.4rem;
+			margin: 0 .45rem;
+			color: #ff5000;
+		}
+		.product-list .p-name{
+			font-size: 20px;
+			margin: .35rem .45rem;
+			color: #666;
+			height: 2.4em;
+			overflow: hidden;
+			line-height: 1.2em;
+			position: relative;
+			word-break: break-all;
+		}
+		.product-list .p-main-img img{
+			width:100%;
+		  	height: 3.5rem;
+		}
+		.product-list .p-price del{
+			color:#9e9e9e;
+			margin-left: 10px;
+  			font-size: 20px;
+		}
+		.product-list .zk{
+			  position: absolute;
+			  top: 0px;
+			  left: -0.25rem;
+			  background: #ff4400;
+			  width: 2.5rem;
+			  text-align: center;
+			  font-size: 20px;
+			  color: #fff;
+			  transform: rotateZ(-45deg) translateX(-0.5rem);
+			  -webkit-transform: rotateZ(-45deg) translateX(-0.5rem);
+			  -moz-transform: rotateZ(-45deg) translateX(-0.5rem);
+			  
+		}
+		.ad img{
+			height: 1.5rem;
+			width: 100%;
+		}
+		.activity {
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			padding: 0;
+			margin: 0.25rem 0;
+			background: #FFFFFF;
+		}
+		.activity img{
+			height: 100%;
+		}
+		.layer.grid{
+			padding: 0px;
+  			margin: 0px;
+		}
+		.layer .layer-title{
+			background: #FFFFFF;
+			padding: 0.1rem 0px;
+			border-left: 5px solid #D3B640;
+			padding-left: 8px;
+		}
+		.type-item a{
+			color:#333333;
+		}
+		.domloaded .store_types{
+			/*display:block;*/
+			opacity: 1;
+		}
+		.store_types{
+			/*display:none;*/
+			opacity: 0;
+		}
+		.grid .col-3.grid-2{
+			border: 1px solid #F0F0EE; 
+			border-width: 0px 2px 2px 2px; 
+			height: 2rem; background: #FFFFFF;
+		}
+		.grid .col-3.grid-3{
+			border: 0px solid #F0F0EE;
+			border-width: 0px 0px 2px 0px;
+			height: 2rem;
+			background: #FFFFFF;
+			margin-left: 0px;
+		}
+		.grid .col-6.grid-4{
+			border: 0px solid #F0F0EE;
+			border: 0px solid #F0F0EE;
+			border-width: 0px 0px 2px 2px;
+			height: 2rem;
+			background: #FFFFFF;
+			height: 2rem;
+			background: #FFFFFF;
+		}
+	</style>
+	<script type="text/javascript">
+		
+		$(function(){
+			$(".start-page").height($(window).height());
+			$(".start-page").css("top",$(window).scrollTop());
+			$(".start-page").delay(2500).fadeOut(4000);
+		});
+	</script>
+		<!-- 商城全局样式 -->
+		<link type="text/css" rel="stylesheet" href="__CDN__/flexible/flexible.css?v=__APP_VERSION__" />
+		<script type="text/javascript" src="__CDN__/flexible/flexible.js?v=__APP_VERSION__"></script>
+		<script type="text/javascript" src="__CDN__/flexible/makegrid.js?v=__APP_VERSION__"></script>
+	<script type="text/javascript" src="__CDN__/amazeui-lazyload/1.9.3/amazeui.lazyload.min.js"  ></script>
+</head>
+<body class="theme-default theme-shop ">
+	
+
+	<if  condition="$showstartpage and !empty(C('SHOP_START_PAGE'))">
+		<div class="start-page">
+			<img class="am-responsive-width" src="{:C('SHOP_START_PAGE')}"  />
+		</div>
+	</if>
+	
+	<header class="am-header am-header-default grid">
+	  <div class="logo col-2">
+	    <a href="{:U('Shop/Index/index')}" >
+	      <img src="__IMG__/logo.png?v=2" alt="logo"  />
+	    </a>
+	  </div>
+	  <div class="js_top_search top-search-wrp col-10">
+	  	<span class="i-search"><i class="am-icon-search"></i>搜索商品、店铺</span>
+	  	<input disabled="disabled" type="text" class="am-form-control top-search " value="" name="q" />
+	  </div>
+	</header>
+	<div data-am-widget="slider" class="am-slider am-slider-a5" data-am-slider='{&quot;directionNav&quot;:false}'>
+	  <ul class="am-slides">
+	  	<volist name="banners" id="vo">
+	  		<li>
+	  			<a href="<empty name='vo.url'>#<else/>{$vo['url']}</empty>">
+	  				<img src='{$vo.img}'  alt="{$vo.title}"  />
+	  			</a>
+	  		</li>
+	  	</volist>
+	  </ul>
+	</div>
+	
+	<div class="store_types grid ">
+		<volist name="store_types" id="vo">
+			<div class="type-item col-3">
+				<a href="{:U('Shop/Wxstore/search',array('cate_id'=>$vo['id']))}">
+				<img  src="{$vo.iconurl}" class="lazy" alt="{$vo.name}" />
+				<span>{$vo.name}</span>
+				</a>
+			</div>
+		</volist>
+	</div>
+	
+	<div class="top-line">
+		<!--TODO: 头条新闻-->
+	</div>
+	<div class="grid activity">
+		<if condition="count($fourgrid) gt 3"> 
+		<div class="col-6 text-center grid-1" style="border: 1px solid #F0F0EE;height: 4rem;  border-left: 0px;background: #FFFFFF;">
+			<a href="{:U('Shop/Product/group',array('id'=>$fourgrid[0]['notes']))}">
+			<img src="{$fourgrid[0]['iconurl']}" alt="{$fourgrid[0]['name']}" class="am-responsive-width lazy"/>
+			</a>
+		</div>
+		<div class=" text-center" >			
+  
+			<div class="col-3 text-center grid-2" >
+				<a href="{:U('Shop/Product/group',array('id'=>$fourgrid[1]['notes']))}">
+				<img  src="{$fourgrid[1]['iconurl']}" alt="{$fourgrid[1]['name']}" class="am-responsive-width lazy" />
+				</a>
+			</div>
+			<div class="col-3 text-center grid-3"  >
+				<a href="{:U('Shop/Product/group',array('id'=>$fourgrid[2]['notes']))}">
+				<img src="{$fourgrid[2]['iconurl']}" alt="{$fourgrid[2]['name']}" class="am-responsive-width lazy" />
+				</a>
+			</div>
+		</div>
+		<div class=" text-center" >			
+			<div class="col-6 text-center grid-4"  >
+				<a href="{:U('Shop/Product/group',array('id'=>$fourgrid[3]['notes']))}">
+				<img  src="{$fourgrid[3]['iconurl']}" alt="{$fourgrid[3]['name']}" class="am-responsive-width lazy" />
+				</a>
+			</div>
+		</div>
+		<else/>
+		
+		</if>
+	</div>
+	
+	
+	<div class="ad ad0">
+		<if condition="count($ads) gt 0">
+		<a href="{$ads[0].url}" ><img src="__IMG__/p640x200.jpg" class="lazy" data-original="{$ads[0].img|default='__IMG__/ad_default.jpg?v=1.0'}" alt="{$ads[0].title}" /></a>
+		<else />
+		<img src="__IMG__/ad_default.jpg?v=1.0"  alt="广告位招租" />
+		</if>
+	</div>
+	<div class="demo">
+                      <!--
+                      	作者：hebiduhebi@126.com
+                      	时间：2015-04-23
+                      	描述：TODO 活动
+                      --></div>
+	
+	<div class="layer grid">
+		<div class="layer-title">优质商家</div>
+		<div class="layer-cont">
+			<div data-am-widget="slider" class="am-slider am-slider-c4" data-am-slider='{&quot;controlNav&quot;:false}'>
+  			<ul class="am-slides">
+  				<volist name="rec_stores" id="vo">
+			  		<li>
+			  			<a href="<empty name='vo.url'>#<else/>{$vo['url']}</empty>">
+			  				<img src="{$vo.img}"  class="" alt="{$vo.title}" />
+	     					<div class="am-slider-desc">
+	         				{$vo.title}
+	     					</div>
+			  			</a>
+			  		</li>
+			  	</volist>
+    
+			  </ul>
+			</div>
+			
+		</div>
+	</div>
+	
+	<!--
+    	作者：hebiduhebi@126.com
+    	时间：2015-04-22
+    	描述：首页嵌入广告02
+    -->
+	<div class="ad ad1">
+		<if condition="count($ads) gt 1">
+		<a href="{$ads[1].url}" ><img src="{$ads[1].img|default='__IMG__/ad_default.jpg?v=1.0'}" alt="{$ads[1].title}" /></a>
+		<else />
+		<img src="__IMG__/ad_default.jpg?v=1.0" alt="广告位招租"  class="lazy" />
+		</if>
+	</div>
+	<div class="am-text-center" style="margin: 0.2rem 0;border-bottom: 1px solid #E2CCCC;">推荐商品</div>
+	<div class="product-list grid">
+		<volist name="recommend_products" id="vo">
+				<div class="product-wrp col-6">
+					<div class="product-item">
+						<a href="{:U('Shop/Product/detail',array('id'=>$vo['id']))}">
+						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg" data-original="{$vo.main_img}" class="lazy" alt="{$vo.name}"/></div>
+						<div class="p-name" >{$vo.name}</div>
+						<div class="p-price" >¥{:number_format($vo['price']/100,1)}<del>¥{:number_format($vo['ori_price']/100,1)}</del></div>
+						<i class="zk">{:number_format(10.0*($vo['price']/$vo['ori_price']),1)}折</i>
+						</a>
+					</div>
+				</div>
+		</volist>
+	</div>
+	<include  file="partial/footermenu" />
+	<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+			<div class="am-footer-switch">
+			</div>
+			<div class="am-footer-miscs ">
+				<p>由
+					<a href="http://www.itboye.com" title="杭州博也网络科技" target="_blank" class="">杭州博也网络科技</a>提供技术支持</p>
+				<p>&copy;2013-{:date('Y')} Version {:C('APP_VERSION')} {:C('WEBSITE_OWNER')}</p>
+				<p>{:C('WEBSITE_ICP')}</p>
+				<p>{__RUNTIME__}</p>
+			</div>
+		</footer>
+		<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+		  <a href="#top" title="回到顶部">
+		    <span class="am-gotop-title">顶部</span>
+		    <i class="am-gotop-icon am-icon-chevron-up"></i>
+		  </a>
+		</div>
+		
+	
+	<script type="text/javascript">
+			function appendItem(item){
+				//TODO: 首页商品加载
+			}
+		function appendList(){		
+			if(window.ajaxing ){
+				console.log("cache");
+				return ;	
+			}
+			window.ajaxing = false;
+			$.ajax({
+				type:'post',
+				url:"{:U('Shop/Product/search')}",
+				data:{p:window.myshop.p},
+				dataType:"json",
+				beforeSend:function(){
+					window.ajaxing = true;
+				}
+			}).always(function(){
+				window.ajaxing = false;
+			}).done(function(data){
+				
+				if(data.status){
+					window.myshop.p++;
+					if(data.info){						
+						for(var i=0;i<data.info.length;i++){
+							console.log(data.info[i]);
+							appendItem(data.info[i]);
+						}
+				
+					}else{
+						//TODO: 没有数据了
+						
+					}
+					
+					
+				}else{
+					alertMsg(data.info);
+				}
+			});
+		}
+	
+	
+		$(function(){
+			$(".start-page").height($(window).height());
+			$(".start-page").css("top",$(window).scrollTop());
+			
+			$(".js_top_search").on("tap",function(){
+				window.location.href = "{:U('Shop/Product/search')}";
+			});
+			$(".js_top_search").on("click",function(){
+				window.location.href = "{:U('Shop/Product/search')}";
+			});
+			$("img.lazy").lazyload({effect : 'fadeIn'});
+			
+			
+			window.myshop = { p : 1 };
+			$(window).on("scroll",function(ev){
+				if($(document).height() - $(window).height() - $(window).scrollTop() < 50){
+//					console.log("trigger");
+					appendList();
+				}
+//				console.log(ev);
+			});
+		})
+		
+	</script>
+	
+		<script type="text/html" src="{:U('Tool/Task/index')}"></script>
+</body>
+</html>
+

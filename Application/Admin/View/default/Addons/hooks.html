@@ -1,0 +1,64 @@
+<extend name="template/base_index"/>
+
+<block name="area_body">
+
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+
+            <!-- 标题栏 -->
+            <h2>钩子列表</h2>
+
+            <div class="cf">
+                <?php if (IS_ROOT): ?>
+                <a class="btn" href="{:U('Admin/Addons/addhook')}">新 增</a>
+                <?php endif ?>
+            </div>
+
+            <!-- 数据列表 -->
+            <div class="data-table table-striped">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                        <th>类型</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.id}</td>
+                            <td><a href="{:U('Admin/Addons/edithook?id='.$vo['id'])}">{$vo.name}</a></td>
+                            <td>{$vo.description}</td>
+                            <td>{$vo.type_text}</td>
+                            <td>
+                                <a title="编辑" href="{:U('Admin/Addons/edithook?id='.$vo['id'])}">编辑</a>
+                                <a class="confirm ajax-get" title="删除"
+                                   href="{:U('Admin/Addons/delhook?id='.$vo['id'])}">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 分页 -->
+            <div class="page">
+                {$_page}
+            </div>
+        </div>
+    </div>
+
+</block>
+
+<block name="area_footer">
+    <script type="text/javascript">
+        $(function () {
+
+        })
+    </script>
+</block>
