@@ -287,19 +287,27 @@
             }
             
             .font_time_style{
-            	background:red;color:white;padding:5px;border-radius:10px;
+            	background:red;
+                color:white;
+                padding:5px;
+                border-radius:10px;
             }
             
             .div_search{
             	width: 100%;
             	height: 1.3rem;
             	line-height: 1.2rem;
-            	background: lawngreen;
+            	background: #92D446;
+            }
+            .div_search form{
+                width: 90%;
+                margin:auto;
+                text-align: center;
             }
         </style>
         <script type="text/javascript" src="__CDN__/sco1.0.2-8/js/sco.countdown2.js"></script>
 </head>
-<body class="theme-default theme-shop ">
+<body class="theme-default theme-shop " >
 	<div data-am-widget="slider" class="am-slider am-slider-a5" data-am-slider='{&quot;directionNav&quot;:false}'>
 	  <ul class="am-slides">
 	  	<volist name="banners" id="vo">
@@ -314,13 +322,12 @@
 	
 	<div class="div_search">
 		<form>
-		<select name="searchType" style="margin-left:0.3rem;height:0.8rem;width:1.5rem;">
-		  <option value="1">商品</option>
+		<select name="searchType" style="display: none;margin-left:0.3rem;height:0.8rem;width:1.5rem;">
+		  <option value="1" selected="selected">商品</option>
 		  <option value="2">店铺</option>
 		</select>		
-		<!--<button style="font-size:0.5rem; margin-left:-0.14rem; height: 1rem;background:lawngreen; width: 2rem;border: none;" ><font class="am-icon-user"></font></button>-->
-		<input style="font-size:0.4rem;margin-left:0.3rem;height: 0.8rem;width:6rem;" placeholder="搜索关键词"/>
-		<button style="font-size:0.5rem; margin-left:-0.14rem; height: 0.8rem;background:lawngreen; width:1.5rem; border: none;" ><font class="am-icon-search"></font></button>
+		<input style="font-size:0.4rem;height: 0.8rem;width:80%;" placeholder="搜索关键词"/>
+		<button style="font-size:0.5rem; margin-left:-0.14rem; height: 0.8rem;background:#62D666; width:1.5rem; border: none;" ><i class="am-icon-search"></i></button>
 		</form>
 	</div>
 	

@@ -1,0 +1,43 @@
+/*html {
+    font-size: 12px;
+}*/
+.div_main {
+    width: 95%;
+    margin: 0 auto;
+   /* text-align: center;*/
+    height:15rem;
+}
+
+
+.div_main ul li.li_info{
+	margin-top: 0.2rem;
+}
+.div_main ul li.li_info input{
+	height: 0.6rem; 
+	font-size: 0.4rem;
+	padding:0.5rem;
+}
+.div_main ul li.li_info select{
+	width: 100%;
+	color:#B8B8B8;
+	font-size: 0.4rem;
+	padding-left:0.4rem;
+	padding:0.4rem;
+}
+
+.div_main ul li.li_info select option{
+
+	font-size: 0.4rem;
+	padding-left:0.4rem;
+}
+
+
+.div_main ul li.li_info  button{
+	height: 1rem;
+	font-size:0.4rem;
+	padding: 0;
+	margin-top:0.7rem;
+}
+
+.error{color: red; font-size: 0.3rem;}
+

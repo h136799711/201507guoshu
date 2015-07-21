@@ -1,0 +1,30 @@
+/*html {
+    font-size: 12px;
+}*/
+
+
+.div_main {
+    width: 95%;
+    margin: 0 auto;
+    text-align: center;
+    height:15rem;
+}
+
+.div_main ul li.li_info{
+	margin-top: 0.3rem;
+	font-size: 0.5rem;
+}
+
+
+.div_main ul li.li_btn{
+	margin-top: 0.3rem;
+	font-size: 0.5rem;
+}
+
+
+.div_main ul li.li_mingxi{
+	margin-top: 4rem;
+}
+
+
+

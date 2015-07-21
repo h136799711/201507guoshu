@@ -191,9 +191,9 @@ class IndexController extends ShopController{
         $name = $this->wxaccount['wxname'];
 
         // 如果是分销商，显示分销商名称
-        if($this->isDistributor()){
-            $name = $this->userinfo['nickname'].'的店铺';
-        }
+//        if($this->isDistributor()){
+//            $name = $this->userinfo['nickname'].'的店铺';
+//        }
 
         return $name;
     }

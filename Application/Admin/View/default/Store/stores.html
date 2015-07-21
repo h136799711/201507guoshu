@@ -16,7 +16,7 @@
 			<!-- 过滤\查询按钮 -->
 				<div class="filter-controls">
 					<!-- 日期查询 -->
-					<form action="{:U('Admin/Wxshop/index')}" method="post" class="form-inline">
+					<form action="{:U('Admin/Store/index')}" method="post" class="form-inline">
 						<div class="form-group">
 							<label>店铺名称</label>
 							<input type="text" name="name" class="form-control input-sm" placeholder="店铺名称" />
@@ -26,7 +26,7 @@
 				</div>
 				<!-- 操作按钮 -->
 				<div class="btn-controls">
-					<a class="btn btn-primary btn-sm" href="{:U('Admin/Wxshop/add')}"><i class="fa fa-plus"></i>{:L('BTN_ADD')}</a>
+					<a class="btn btn-primary btn-sm" href="{:U('Admin/Store/add')}"><i class="fa fa-plus"></i>{:L('BTN_ADD')}</a>
 				
 				</div>
 
@@ -59,14 +59,14 @@
 										{$vo.id}
 									</td>
 									<td>
-										<a href="{:U('Admin/Wxshop/view',array('id'=>$vo['id']))}">{$vo.name}</a>
+										<a href="{:U('Admin/Store/view',array('id'=>$vo['id']))}">{$vo.name}</a>
 									</td>									
 									<td>
 										{$vo.createtime|date='Y-m-d h:i:s',###}
 									</td>
 									<td>
-										<a href="{:U('Admin/Wxshop/edit',array('id'=>$vo['id']))}" class="btn btn-sm btn-default"><i class="fa fa-edit"></i>编辑</a>
-										<a href="{:U('Admin/Wxshop/delete',array('id'=>$vo['id']))}" class="ajax-get confirm btn btn-sm btn-danger"><i class="fa fa-trash"></i>删除</a>
+										<a href="{:U('Admin/Store/edit',array('id'=>$vo['id']))}" class="btn btn-sm btn-default"><i class="fa fa-edit"></i>编辑</a>
+										<a href="{:U('Admin/Store/delete',array('id'=>$vo['id']))}" class="ajax-get confirm btn btn-sm btn-danger"><i class="fa fa-trash"></i>删除</a>
 									</td>
 								</tr>
 
