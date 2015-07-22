@@ -357,7 +357,22 @@
 				
 				<div class="product-wrp col-6">
 					<div class="product-item">
-						<a href="{:U('Shop/Product/detail',array('id'=>$vo['id']))}">
+
+                        <a id="a_{$vo.id}"
+                        <if condition="$vo.id eq 41">
+                            <eq name="flashSaleTime" value="-1">
+                                href="javascript:void(0)"
+                                <else />
+                                href="{:U('Shop/Product/search2',array('g_id'=>$vo['id']))}"
+                            </eq>
+                            <else />
+                            <eq name="flashSaleWeekTime" value="-1">
+                                href="javascript:void(0)"
+                                <else />
+                                href="{:U('Shop/Product/search2',array('g_id'=>$vo['id']))}"
+                            </eq>
+                        </if> >
+
 						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg" data-original="{$vo.iconurl}" class="lazy" alt="{$vo.name}"/></div>
 							<if condition="$vo.id eq 41">
 								<i class="zk" style="background: purple;">今日抢购</i>

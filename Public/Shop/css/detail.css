@@ -305,11 +305,11 @@ html {
 
 .detail-page .footer-menu {
 	position: fixed;
-	background: #fff;
+	background:#F0F0EE;
 	bottom: 0px;
 	width: 100%;
 	text-align: center;
-	padding: 10px 5px;
+	padding: 5px 2px;
 	z-index: 99999;
 }
 .score1 {

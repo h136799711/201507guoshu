@@ -154,6 +154,31 @@
 			height: 14px;
 			border-right: 1px #ddd solid;
 		}
+		
+		
+		.theme-shop .am-gotop-fixed {
+			  bottom: 3rem;
+			  left: 0.2rem;
+			  width: 1.5rem;
+		}
+		.theme-shop .am-gotop-fixed .am-gotop-icon {
+			  width: 100%;
+			  height: 1.5rem;
+			  line-height: 1.3rem;
+			  background-color: #FF4400;
+			  vertical-align: middle;
+			  color: #FAFAFA;
+			  border-radius: 50%;
+		}
+		body {
+			  position: relative;
+			  background: #fff;
+			  font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
+			  font-weight: 400;
+			  line-height: 1.6;
+			  color: #333;
+			  font-size: 0.6rem;
+		}
 	</style>
 </block>
 
@@ -189,20 +214,19 @@
 	</div>
 	
 	<div class="quick-menu">
+		
 		<ul class="am-list goto-order">
-		  <li class="am-cf"><a href="{:U('Shop/User/order')}"><i class="icon am-icon-reorder"></i>编辑个人信息<i class="am-fr am-icon-chevron-right"></i></a> </li>
+		  <li class="am-cf"><a href="{:U('Shop/User/order')}"><i class="icon am-icon-reorder"></i>我的订单<i class="am-fr am-icon-chevron-right"></i></a> </li>
+		</ul>
+		<ul class="am-list goto-order">
 		
 		  <li class="am-cf"><a href="{:U('Shop/User/withdraw')}"><i class="icon am-icon-cny"></i>余额：0.00元<i class="am-fr am-icon-chevron-right"></i></a> </li>
 		
-		  <li class="am-cf"><a href="{:U('Shop/Suggest/add')}"><i class="icon am-icon-question-circle"></i>果蔬币：0个<i class="am-fr am-icon-chevron-right"></i></a> </li>
-		  <li class="am-cf"><a href="{:U('Shop/Suggest/add')}"><i class="icon am-icon-question-circle"></i>优惠券<i class="am-fr am-icon-chevron-right"></i></a> </li>
-		  <li class="am-cf"><a href="{:U('Shop/Suggest/add')}"><i class="icon am-icon-question-circle"></i>购买记录<i class="am-fr am-icon-chevron-right"></i></a> </li>
-		  <li class="am-cf"><a href="{:U('Shop/Suggest/add')}"><i class="icon am-icon-question-circle"></i>众付记录<i class="am-fr am-icon-chevron-right"></i></a> </li>
-		  <li class="am-cf"><a href="{:U('Shop/Suggest/add')}"><i class="icon am-icon-question-circle"></i>充值卡<i class="am-fr am-icon-chevron-right"></i></a> </li>
 		</ul>
-	</div>
-	<div style="text-align: center;">
-	<button type="button" class="am-btn am-btn-success" style="width: 8rem; height: 1.5rem; padding: 0; font-size:0.7rem;margin-top: -0.8rem;">我要收购</button>
+		
+		<ul class="am-list suggest">
+		  <li class="am-cf"><a href="{:U('Shop/Suggest/add')}"><i class="icon am-icon-question-circle"></i>帮助与反馈<i class="am-fr am-icon-chevron-right"></i></a> </li>
+		</ul>
 	</div>
 </block>
 

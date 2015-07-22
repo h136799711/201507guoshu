@@ -13,6 +13,7 @@ use Shop\Api\CategoryPropvalueApi;
 use Shop\Api\OrdersApi;
 use Shop\Api\OrdersItemApi;
 use Shop\Api\ProductApi;
+use Shop\Api\ProductGroupApi;
 use Shop\Api\ProductSkuApi;
 use Shop\Api\SkuApi;
 use Shop\Api\SkuvalueApi;
@@ -123,6 +124,7 @@ class ProductController extends ShopController {
 			$this ->theme($this->themeType)->display();
 		}
 	}
+
 	/**
 	 * 商品分组页面
 	 */
@@ -385,6 +387,124 @@ class ProductController extends ShopController {
 		array_pop($imgs);
 		array_push($imgs, $product['main_img']);
 		return $imgs;
+	}
+	
+	
+	
+	
+	/**
+	 * 限时抢购
+	 */
+	public function search2() {
+		//排序： s 综合 ，d 销量 ,p 价格 从小到大, pd 价格 从大到小
+		$sort = I('sort', 's');
+		$type = I('type', '1');
+		$layout = I('get.layout', 'list');
+		$gid=I('get.g_id','');
+		if($gid==""){
+			$gid=I('post.g_id','');
+		}
+		
+		$map = array();
+		$q = I('q','');
+		$page = array('curpage' => I('post.p', 0,'intval'), 'size' => 10);
+		$order = " id desc ";
+		if ($sort == 's') {
+			$order = " price desc";
+		}
+		if ($sort == 'p') {
+			$order = " price desc";
+		}
+		if ($sort == 'pd') {
+			$order = " price asc";
+		}
+		$this -> assign("g_id",$gid);
+		$params = false;
+		
+		if($gid!=""){
+			if($gid==getDatatree("TODAY_PURCHASE")){
+				$map=array(
+					'g_id'=>getDatatree("FLASH_SALE"),
+					'start_time'=>array(
+						'lt',time()
+					),
+					'end_time'=>array(
+						'gt',time()
+					),
+				);
+			}else if($gid==getDatatree("WEEK_PURCHASE")){
+				$days=7-(float)date('N',time());
+				$map=array(
+					'g_id'=>getDatatree("FLASH_SALE"),
+					'start_time'=>array(
+						'between',array(strtotime(date("y-m-d",time()))+3600*24,strtotime(date("y-m-d",time()))+3600*24*$days),
+					),
+				);
+			}else if($gid==getDatatree("SUPER_DISCOUNT")){
+				$map=array(
+					'g_id'=>getDatatree("SUPER_DISCOUNT"),
+				);
+			}else if($gid==getDatatree("FRUIT_BOX")){
+				$map=array(
+					'g_id'=>getDatatree("FRUIT_BOX"),
+				);
+			}else if($gid==getDatatree("FRUIT_JUICE")){
+				$map=array(
+					'g_id'=>getDatatree("FRUIT_JUICE"),
+				);
+			}else if($gid==getDatatree("CURRENT_SEASON_FRUIT")){
+				$map=array(
+					'g_id'=>getDatatree("CURRENT_SEASON_FRUIT"),
+				);
+			}else if($gid==getDatatree("IMPORT_BOUTIQUE")){
+				$map=array(
+					'g_id'=>getDatatree("IMPORT_BOUTIQUE"),
+				);
+			}
+			$map['onshelf']=1;
+			$result=apiCall(ProductGroupApi::GROUP_WITH_PRODUCT,array($map));
+		}else{
+			$result = apiCall(ProductApi::QUERY_WITH_STORE, array($q,$type, $page, $order, $params));
+		}
+		if (!$result['status']) {
+			$this -> error($result['info']);
+		}
+		$map1=array(
+			'hidden_value'=>'fruitType',
+		);
+		
+		$result1=apiCall(DatatreeApi::QUERY_NO_PAGING,array($map1));
+		$this->assign("fruitTypes",$result1['info']);
+		
+		if($gid!=""){
+			$list = $result['info'];
+		}else{
+			$list = $result['info']['list'];
+		}
+		if(!is_null($list)){
+			$list = $this -> queryMonthlySales($list);
+//			dump($list);
+			if ($sort == 'd') {
+				//对销量进行排序
+				$list = ($this->quickSort(0, count($list)-1,  $list));
+				
+			}
+		}
+		
+		
+		//dump($list);
+		if(IS_POST){
+//			echo json_encode($list);
+			$this->success($list);
+		}else{
+			$this -> assign("q", $q);
+			$this -> assign("layout", $layout);
+			$this -> assign("sort", $sort);
+			$this -> assign("curpage", $page['curpage']);
+			$this -> assign("show", $result['info']['show']);
+			$this -> assign("list", $list);
+			$this ->theme($this->themeType)->display();
+		}
 	}
 
 }

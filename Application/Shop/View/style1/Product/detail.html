@@ -35,6 +35,12 @@
 			background:lightgray;
 		}
 		
+		
+		.countStyle{
+			border: 1px solid #ccc;
+			background: white;
+			text-align: center;
+		}
 	</style>
 </block>
 
@@ -68,8 +74,18 @@
 		<div class="p-info">
 			<p class="p-name">{$product.name}</p>
 			<div class="p-price" >
-				<p class="" style="">价格:<font color="orangered" size="+1">¥{:number_format($product['price']/100,2)}</font></p>
-				<p class="lgray p-ori-price">原价:<del>¥{:number_format($product['ori_price']/100,2)}</del></p>
+				<p class="" style="">价格:<font color="orangered" size="+1">¥{:number_format($product['price']/100,2)}</font>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量:
+					<input type="button" class="countStyle" onclick="subtract()" value="-"/>
+					<input type="text" name="sku_count" size="2" value="1" class="countStyle" onchange="checkNum()"/>
+					<input type="button" class="countStyle"  onclick="add()" value="+"/>
+				</p>
+				<p class="lgray p-ori-price">原价:<del>¥{:number_format($product['ori_price']/100,2)}</del>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font color="#666">库存:<font>{$product.quantity}</font></font>
+					<input type="hidden" id="quantity" value="{$product.quantity}" />	
+					
+				</p>
 			</div>
 			<ul class="am-avg-sm-3 am-list p-extra lgray">
 				<li class="am-text-left" ><if condition="$product['attrext_ispostfree'] eq 1" >包邮<else/>{$express_str}</if></li>
@@ -91,9 +107,10 @@
 				<div class="service-item am-margin-right-sm">
 					<i class="am-icon-check-circle-o  am-text-danger  am-margin-right-xs"></i>如实描述
 				</div>
+				<!--
 				<div class="service-item am-margin-right-sm">
 					<i class="am-icon-check-circle-o  am-text-danger  am-margin-right-xs"></i>1小时内送货上门
-				</div>
+				</div>-->
 				<div class="service-item am-margin-right-sm">
 					<i class="am-icon-check-circle-o  am-text-danger  am-margin-right-xs"></i>支持货到付款体验
 				</div>
@@ -220,12 +237,17 @@
 		</div>
 		
 		<div class="footer-menu btn-controls">
-		      <a data-am-loading="{spinner: 'circle-o-notch', loadingText: '放入篮子...'}" href='#' onclick='addToCart();'  class="js_add_to_cart am-btn-sm am-btn am-btn-primary" style="border-radius:10px;background:#B0FF54 ;border: 1px solid #B0FF54;">
+		     <!-- <a data-am-loading="{spinner: 'circle-o-notch', loadingText: '放入篮子...'}" href='#' onclick='addToCart();'  class="js_add_to_cart am-btn-sm am-btn am-btn-primary"  style="border-radius:10px;background:#B0FF54 ;border: 1px solid #B0FF54;">
 		        <span class="add-cart">放入篮子</span>
 		      </a>
+		     
 		      <a  href="#" onclick="return buyProduct();"  class=" am-btn am-btn-sm  am-btn-danger" style="border-radius:10px;background:#FF54B0 ;border: 1px solid #FF54B0;">
 		        <span class="buy">立即购买</span>
 		      </a>
+		      
+		    -->
+		      <span  style="background:#FF8000;padding: 0.4rem 3.5rem;font-size: 1rem;color: white;font-family: '微软雅黑'; border-radius: 0.2rem;" onclick='addToCart()'><font class="am-icon-dollar"></font>&nbsp;立即购买</span>
+		      <span  style="background: white;margin-left:0.2rem;padding: 0.4rem 3.5rem;font-size:1rem;font-family: '微软雅黑';border-radius: 0.2rem" onclick="return buyProduct()" ><font class="am-icon-shopping-cart"></font>&nbsp;放入篮子</span>
 		</div>
 		<eq name="product['has_sku']" value="1">
 		
@@ -262,7 +284,7 @@
 				 </div>
 			</div>
 			</div>
-			
+			<!--
 			<div class="btn-controls">				
 			    <a data-am-loading="{spinner: 'circle-o-notch', loadingText: '加入购物车...'}" href='#' onclick='addToCart();' class="js_add_to_cart am-btn am-btn-primary">
 			       <span class="add-cart">加入购物车</span>
@@ -271,7 +293,7 @@
 			      <span class="buy">立即购买</span>
 			    </a>
 			</div>
-			
+			-->
 		</div>
 
 		</div>
@@ -286,8 +308,6 @@
 </block>
 
 <block name="area_footer">
-	
-	<include  file="partial/product_footer" />
 	
 	<script type="text/javascript" src="__CDN__/handlebar/3.0.3/handlebars.js?v=1.0"></script>
 	
@@ -764,6 +784,42 @@
 					alertMsg(data.info);
 				}
 			});
+		}
+		 
+		/**
+		 * 减数量
+		 */
+		function subtract(){
+			var $sku_count=$("input[name='sku_count']");
+			if($sku_count.val()==1){
+				return;
+			}
+			$sku_count.val($sku_count.val()-1);
+		}
+		
+		/**
+		 *加数量 
+		 */
+		function add(){
+			var $sku_count=$("input[name='sku_count']");
+			if($sku_count.val()==$("#quantity").val()){
+				return;
+			}
+			$sku_count.val(parseInt($sku_count.val())+1);
+		}
+		
+		/**
+		 * 检查是否为整数 ,是否合理
+		 */
+		function checkNum(){
+			var $sku_count=$("input[name='sku_count']");
+			$reg=/^\+?[1-9][0-9]*$/;
+			if(!$reg.test($sku_count.val())){
+				$sku_count.val(1);
+			}
+			if($sku_count.val()>$("#quantity").val()){
+				$sku_count.val($("#quantity").val());
+			}
 		}
 		
 	</script>
