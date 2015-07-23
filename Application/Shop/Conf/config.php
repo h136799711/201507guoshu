@@ -25,7 +25,7 @@ return array(
 		'KEY'=>'E48D86C64D6B8EA672BEBF6ACC75AD94',//在微信发送的邮件中查看,patenerkey
 //
 		'NOTIFYURL'=>'http://shuiguo.itboye.com/index.php/Shop/WxpayNotify/index',
-		'JSAPICALLURL'=>'http://renren.itboye.com/index.php/Shop/Orders/pay?showwxpaytitle=1',
+		'JSAPICALLURL'=>'http://shuiguo.itboye.com/index.php/Shop/Orders/pay?showwxpaytitle=1',
 		'SSLCERTPATH'=>'/alidata/8rawcert/10027619/apiclient_cert.pem',
 		'SSLKEYPATH'=>'/alidata/8rawcert/10027619/apiclient_cert.pem',
 		'CURL_PROXY_HOST' => "0.0.0.0",

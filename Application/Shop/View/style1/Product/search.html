@@ -259,7 +259,7 @@
 			$.ajax({
 				type:'post',
 				url:"{:U('Shop/Product/search')}",
-				data:{q:q,p:window.myshop.p},
+				data:{type:type,q:q,p:window.myshop.p},
 				dataType:"json",
 				beforeSend:function(){
 					window.ajaxing = true;

@@ -75,7 +75,10 @@ class ProductController extends ShopController {
 		$gid=I('get.g_id','');
 		//dump($gid);
 		
-		$map = array();
+		$map = array(
+            'type'=>$type,
+            'g_id'=>$gid
+        );
 		$q = I('q','');
 		$page = array('curpage' => I('post.p', 0,'intval'), 'size' => 10);
 		$order = " id desc ";
@@ -96,7 +99,7 @@ class ProductController extends ShopController {
 		$this->assign("fruitTypes",$result1['info']);
 		$this -> assign("g_id",$gid);
 		$params = false;
-		$result = apiCall(ProductApi::QUERY_WITH_STORE, array($q,$type, $page, $order, $params));
+		$result = apiCall(ProductApi::QUERY_WITH_STORE, array($q,$map, $page, $order, $params));
 		if (!$result['status']) {
 			$this -> error($result['info']);
 		}

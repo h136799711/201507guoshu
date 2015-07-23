@@ -256,10 +256,11 @@
 			var q = $(".header input[name='q']").val();
 			var type = $(".header select[name='type']").val();
 			window.ajaxing = false;
+            var g_id = "{$g_id}";
 			$.ajax({
 				type:'post',
 				url:"{:U('Shop/Product/search2')}",
-				data:{q:q,p:window.myshop.p,g_id="{$g_id}"},
+				data:{q:q,p:window.myshop.p,g_id:g_id},
 				dataType:"json",
 				beforeSend:function(){
 					window.ajaxing = true;

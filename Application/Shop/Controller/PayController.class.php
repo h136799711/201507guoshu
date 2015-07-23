@@ -213,10 +213,10 @@ class PayController extends ShopController {
             WxPayApi::setConfig($config);
             $order = WxPayApi::unifiedOrder($input);
 
-            if(isset($order['return_code']) && $order['return_code'] == 'FAIL'){
-                    $this->error($order['return_msg']);
+            if(isset($order['return_code']) && $order['result_code'] == 'FAIL'){
+                $this->error($order['err_code_des']);
             }
-
+//            dump($order);
             addWeixinLog($order,"GETJsApiParameters");
             $jsApiParameters = $tools -> GetJsApiParameters($order);
             $this -> assign("jsApiParameters", $jsApiParameters);

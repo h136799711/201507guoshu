@@ -239,14 +239,18 @@
               	5. 全部 － 删除订单［］
               -->
               {{#eq pay_status 0}}
-              <a href="{:U('Shop/OnlinePay/pay')}?id={{orderid}}" class="am-btn-xs am-btn am-btn-primary">立即支付</a>
+              <a href="{:U('Shop/Pay/pay')}?id={{orderid}}" class="am-btn-xs am-btn am-btn-primary">立即支付</a>
               <a href="{:U('Shop/Orders/cancelOrder')}?id={{orderid}}" data-tip="确定取消订单?操作无法恢复!" class="ajax-get confirm am-btn-xs am-btn am-btn-default">取消订单</a>              
 	  		 {{/eq}}
-              
-              {{#eq pay_status 5}}
-              
-              <span class="am-text-xs">您选择了货到付款,请准备好现金，<br />送货员马上就到！</span><br/>
-              {{/eq}}
+
+            {{#eq pay_status 5}}
+
+            <span class="am-text-xs">您选择了货到付款,请准备好现金，<br />送货员马上就到！</span><br/>
+            {{/eq}}
+            {{#eq pay_status 1}}
+
+            <span class="am-text-xs">已支付，<br/>送货员马上就到!</span><br/>
+            {{/eq}}
               
               {{#eq order_status 3}}
               <span class="am-text-xs">店铺微信号: {{_store.wxno}},联系电话: <a href="tel:{{_store.service_phone}}">{{_store.service_phone}}</a></span>
