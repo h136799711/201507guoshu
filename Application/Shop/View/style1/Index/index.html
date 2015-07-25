@@ -377,7 +377,7 @@
                             </eq>
                         </if> >
 
-						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg" data-original="{$vo.iconurl}" class="lazy" alt="{$vo.name}"/></div>
+						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg?V=1.0" data-original="{$vo.iconurl}" class="lazy" alt="{$vo.name}"/></div>
 							<if condition="$vo.id eq 41">
 								<i class="zk" style="background: purple;">今日抢购</i>
 								<eq name="flashSaleTime" value="-1">
@@ -443,7 +443,7 @@
 				<div class="product-wrp col-6">
 					<div class="product-item">
 						<a href="{:U('Shop/Product/detail',array('id'=>$vo['id']))}">
-						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg" data-original="{$vo.main_img}" class="lazy" alt="{$vo.name}"/></div>
+						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg?V=1.0" data-original="{$vo.main_img}" class="lazy" alt="{$vo.name}"/></div>
 						<div class="p-name" >{$vo.name}</div>
 						<div class="p-price" >¥{:number_format($vo['price']/100,2)}<del>¥{:number_format($vo['ori_price']/100,2)}</del></div>
 						<i class="zk">{:number_format(10.0*($vo['price']/$vo['ori_price']),1)}折</i>
