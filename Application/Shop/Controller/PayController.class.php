@@ -149,7 +149,10 @@ class PayController extends ShopController {
                 $this -> error("支付金额不能小于0！");
             }
 
-			$total_fee = 1;
+            if(APP_DEBUG){
+			    $total_fee = 1;
+            }
+
             if(empty($body)){
                 $body = date("Y-m-d",time())."购买商品";
             }
