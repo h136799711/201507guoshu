@@ -36,8 +36,8 @@ class ShopController extends  Controller {
 		}
 		C('SHOW_PAGE_TRACE', false);//设置不显示trace
 		$this -> refreshWxaccount();
-//		$debug = true;
-		$debug = false;
+		$debug = true;
+//		$debug = false;
 		
 		if($debug){
 			$this->getDebugUser();
@@ -46,9 +46,8 @@ class ShopController extends  Controller {
 			$this->getWxuser($url);
 		}
 		
-		if(empty($this->userinfo)){
+		if(empty($this->userinfo) || $this->userinfo['subscribed'] == 0){
 			$this->display("Error:please_subscribe");
-//			$this->error("请先关注公众号，无法获取到用户信息！");
 			exit();
 		}
         $this->assign("userinfo",$this->userinfo);
@@ -63,18 +62,19 @@ class ShopController extends  Controller {
 		$this->userinfo = array(
 			'id'=>1,
             'uid'=>224,
-            'openid'=>'on1gxt-HCbKcX4r56QwXVrBvpFoA',
-//			'openid'=>'oxGH0sgeUkH4g8aowy0452xJnX1o',
+            'openid'=>'oEdenwaqK41g_a0Cf062lxELKfVc',
 			'nickname'=>'老胖子何必都',
 			'avatar'=>'http://wx.qlogo.cn/mmopen/An6TFzHNImPecEhl1R3UWd26LlC1mvVgyhdh2KGCOb0yjQ4JNQnOicG2ysaKojzusSO9R3RE55Exq0lYKpVr3RRArU0u7kgjR/0',
 			'score'=>0,
 			'wxaccount_id'=>1,
 			'exp'=>100,
             'groupid'=>11,
+            'subscribed'=>1,
 		);
 		
 //		$this->wxapi = new \Common\Api\WeixinApi('wx5f9ed360f5da5370','4a0e3e50c8e9137c4873689b8ee99124');
-		$this->openid = "on1gxt-HCbKcX4r56QwXVrBvpFoA";
+		$this->openid = "oEdenwaqK41g_a0Cf062lxELKfVc";
+
 	}
 	
 	

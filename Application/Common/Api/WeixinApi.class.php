@@ -203,8 +203,11 @@ class WeixinApi {
 				return array('status' => true, 'msg' => '');
 			} else {
 				$index = $result['msg'] -> errcode;
-
-				return array('status' => false, 'msg' => $this -> errcode[$index]);
+                if(isset($this -> errcode[$index])){
+                    return array('status' => false, 'msg' => $this -> errcode[$index]);
+                }else{
+				return array('status' => false, 'msg' => $result['msg']->errmsg);
+                }
 			}
 		} else {
 			return array('status' => false, 'msg' => $result['msg']);

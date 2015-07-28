@@ -41,7 +41,7 @@ class StoreController extends AdminController{
 			if($result['status']){
 				C('WXPAY_OPENID',$openids);
 				
-				$this->success(L('RESULT_SUCCESS'),U('Shop/config'));
+				$this->success(L('RESULT_SUCCESS'),U('Store/config'));
 			}else{
 				if(is_null($result['info'])){
 					$this->error("无更新！");

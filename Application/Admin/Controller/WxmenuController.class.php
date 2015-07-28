@@ -164,18 +164,18 @@ class WxmenuController extends AdminController {
 					if ($result['status']) {
 						$this -> success(L("RESULT_SUCCESS"));
 					} else {
-						LogRecord($result['msg'], __FILE__);
+						LogRecord($result['msg'], __FILE__.__LINE__);
 						$this -> error($result['msg']);
 					}
 					//
 
 				} else {
-					LogRecord($result['info'], __FILE__);
+					LogRecord($result['info'], __FILE__.__LINE__);
 					$this -> error($result['info']);
 				}
 
 			} else {
-				LogRecord($result['info'], __FILE__);
+				LogRecord($result['info'], __FILE__.__LINE__);
 				$this -> error($result['info']);
 			}
 		}

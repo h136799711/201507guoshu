@@ -48,7 +48,7 @@ class WeixinPromotionAddon extends Addon
 
             return ;
         }
-        addWeixinLog("插件二维码处理","WeixinInnerProcess");
+//        addWeixinLog("插件二维码处理","WeixinInnerProcess");
         $data = $param['data'];
 
         $this->config = $this->getConfig();

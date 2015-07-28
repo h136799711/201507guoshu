@@ -7,6 +7,7 @@
 // |-----------------------------------------------------------------------------------
 namespace Shop\Controller;
 
+use Addons\WeixinMsgSend\WeixinMsgSendAddon;
 use Admin\Api\DatatreeApi;
 use Shop\Api\BannersApi;
 use Shop\Api\ProductApi;
@@ -78,6 +79,7 @@ class IndexController extends ShopController{
 	 * 首页
 	 */
 	public function index(){
+
 		$map= array(
 			'uid'=>$this->wxaccount['uid'],
 			'storeid'=>-1,

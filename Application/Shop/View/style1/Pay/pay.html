@@ -92,9 +92,9 @@
 						url:url,
 						type:'post',
 						//datyType:'json',
-						data:{id:ids},
+						data:{id:ids}
 					}).done(function(data){
-						alertMsg(data);
+//						alertMsg(data);
 						if(data.status){
 							alertMsg(data.info);
 							window.location.href = "{:U('Shop/User/order')}";
@@ -102,9 +102,9 @@
 							alertMsg(data.info);
 						}
 					}).error(function(XMLHttpRequest, textStatus, errorThrown){
-						 alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
+//						 alert(XMLHttpRequest.status);
+//                        alert(XMLHttpRequest.readyState);
+                        alertMsg("发生错误，请重试！");
 					})
 					;
 					

@@ -49,8 +49,10 @@ class WeixinMsgSendAddon extends Addon
     /**
      * @param $param
      */
-    public function send_msg_to_user($param)
+    public function send_msg_to_user(&$param)
     {
+//        LogRecord("发送消息插件被调用", __FILE__ . __LINE__);
+//        addWeixinLog($param,"发送消息插件被调用！");
         if (!isset($param['appid']) || !isset($param['appsecret']) ||
             !isset($param['text']) || !isset($param['openid'])
         ) {
@@ -66,10 +68,21 @@ class WeixinMsgSendAddon extends Addon
         $text = $param['text'];
         $openid = $param['openid'];
 
+
         $this->wxapi = new WeixinApi($appid, $appsecret);
 
-        for ($i = 0; $i < $config['cnt']; $i++) {
-            $this->sendMsg($openid, $text);
+        if(is_array($openid)){
+            for ($i = 0; $i < $config['cnt']; $i++) {
+                for ($j = 0; $j < count($openid); $j++) {
+                    $this->sendMsg($openid[$j], $text);
+                }
+            }
+            $openid = implode(",",$openid);
+        }
+        else{
+            for ($i = 0; $i < $config['cnt']; $i++) {
+                $this->sendMsg($openid, $text);
+            }
         }
 
         $entity = array(
@@ -101,8 +114,6 @@ class WeixinMsgSendAddon extends Addon
     private function sendMsg($openid, $text)
     {
         $this->wxapi->sendTextToFans($openid, $text);
-
-
     }
 
 }

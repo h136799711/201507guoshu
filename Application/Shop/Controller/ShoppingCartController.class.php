@@ -7,6 +7,7 @@
 // |-----------------------------------------------------------------------------------
 namespace Shop\Controller;
 
+use Addons\WeixinMsgSend\WeixinMsgSendAddon;
 use Shop\Api\ProductApi;
 use Shop\Api\ProductSkuApi;
 use Shop\Api\StoreApi;
@@ -29,6 +30,7 @@ class ShoppingCartController extends ShopController{
 	 * 购物车查看页面
 	 */
 	public function index(){
+
 		session("confirm_order_info",null);
 		$store = $this->getStoreInfo();
 		

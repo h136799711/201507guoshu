@@ -180,9 +180,9 @@
 	<script type="text/javascript">
 		
 		$(function(){
-			$(".start-page").height($(window).height());
-			$(".start-page").css("top",$(window).scrollTop());
-			$(".start-page").delay(2500).fadeOut(4000);
+//			$(".start-page").height($(window).height());
+//			$(".start-page").css("top",$(window).scrollTop());
+//			$(".start-page").delay(2500).fadeOut(4000);
 		});
 	</script>
 		<!-- 商城全局样式 -->
@@ -310,7 +310,7 @@
         </style>
         <script type="text/javascript" src="__CDN__/sco1.0.2-8/js/sco.countdown2.js"></script>
 </head>
-<body class="theme-default theme-shop " >
+<body class="theme-default theme-shop am-hide" >
 
 <div class="div_search">
     <form>
@@ -335,10 +335,10 @@
 	</div>
 
 	
-	<div class="grid activity">
+	<div class="grid activity" style="margin-left: 0px;">
 		<if condition="count($fourgrid) gt 3"> 
 		
-		<div class=" text-center" >	
+		<div class="am-center am-cf" >
 			<volist name="fruitsType" id="f">
 				<div class="col-3 text-center grid-2" >
 					<a href="{:U('Shop/Product/search2',array('g_id'=>$f['id']))}">
@@ -383,14 +383,15 @@
 								<eq name="flashSaleTime" value="-1">
 									<div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
 									<else />
-									<div class="div_time" data-until="{$flashSaleTime}" style="color:blue;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;"></div>
+									<div class="div_time" data-until="{$flashSaleTime}" style="color: #ffffff;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;"></div>
 								</eq>
 								<else />
 								<i class="zk" style="background: #FF499D;">本周抢购</i>
 								<eq name="flashSaleWeekTime" value="-1">
 									<div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
 									<else />
-									<div class="div_time2" data-until="{$flashSaleWeekTime}" style="color:blue;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;"></div>
+									<div class="div_time2" data-until="{$flashSaleWeekTime}" style="
+    color: #ffffff;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;"></div>
 								</eq>
 							</if>
 						</a>
@@ -516,9 +517,10 @@
 	
 	
 		$(function(){
-			$(".start-page").height($(window).height());
-			$(".start-page").css("top",$(window).scrollTop());
-			
+            $("body.am-hide").removeClass("am-hide");
+
+//			$(".start-page").height($(window).height());
+//			$(".start-page").css("top",$(window).scrollTop());
 			$(".js_top_search").on("tap",function(){
 				window.location.href = "{:U('Shop/Product/search')}";
 			});
@@ -549,7 +551,7 @@
 	    	//alert(until2);
 	    	//thid = parseInt(thid);
 	    	$(".div_time2").scojs_countdown({until: until2});
-			
+
 		})
 		
 		
