@@ -8,6 +8,8 @@
 
 namespace Admin\Controller;
 
+use Admin\Api\ConfigApi;
+
 class ConfigController extends AdminController {
 
 	protected function _initialize() {
@@ -48,7 +50,7 @@ class ConfigController extends AdminController {
 		}else{
 			$config = I('config');
 			$order = 'sort desc';
- 			$result = apiCall("Admin/Config/set",array($config,$order));
+ 			$result = apiCall(ConfigApi::SET,array($config,$order));
 			if($result['status']){
 				//清除缓存
         		S("config_" . session_id() . '_' . session("uid"),null);

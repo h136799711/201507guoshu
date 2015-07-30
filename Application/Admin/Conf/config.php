@@ -68,6 +68,22 @@ return array(
 		'1023'=>"英国",
 		'1045'=>"韩国",
 		
-	)
-	
+	),
+
+    'WXPAY_CONFIG'=>array(
+
+    'APPID'=>'wx5f75a875d7bb9c28',
+    'APPSECRET'=>'818dec3ac3c3ba43e4ca018f4fd77553',
+    'MCHID'=>'1250762701',
+    'KEY'=>'E48D86C64D6B8EA672BEBF6ACC75AD94',//在微信发送的邮件中查看,patenerkey
+//
+    'NOTIFYURL'=>'http://shuiguo.itboye.com/index.php/Shop/WxpayNotify/index',
+    'JSAPICALLURL'=>'http://shuiguo.itboye.com/index.php/Shop/Orders/pay?showwxpaytitle=1',
+    'SSLCERTPATH'=>'/alidata/8rawcert/10027619/apiclient_cert.pem',
+    'SSLKEYPATH'=>'/alidata/8rawcert/10027619/apiclient_cert.pem',
+    'CURL_PROXY_HOST' => "0.0.0.0",
+    'CURL_PROXY_PORT' => '0',
+    'REPORT_LEVENL' => 1,
+    'PROCESS_URL'=>'http://shuiguo.itboye.com/index.php/Shop/WxpayNotify/aysncNotify?key=hebidu',//异步处理地址
+),
 );

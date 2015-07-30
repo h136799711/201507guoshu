@@ -212,11 +212,11 @@ class OrdersController extends AdminController {
 		}
 
 		//		$map['createtime'] = array( array('EGT', $startdatetime), array('elt', $enddatetime), 'and');
-		//$map['pay_status'] = OrdersModel::ORDER_PAID;
+//		$map['pay_status'] = OrdersModel::ORDER_PAID;
 		
-		$map['pay_status']=OrdersModel::ORDER_CASH_ON_DELIVERY;
+		$map['pay_status'] = array(array('eq',OrdersModel::ORDER_CASH_ON_DELIVERY),array('eq',OrdersModel::ORDER_PAID), 'or');
 		$page = array('curpage' => I('get.p', 0), 'size' => C('LIST_ROWS'));
-		$order = " createtime desc ";
+		$order = " pay_status Asc";
 
 		if ($userid > 0) {
 			$map['wxuser_id'] = $userid;

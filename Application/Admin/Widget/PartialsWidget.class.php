@@ -8,6 +8,7 @@
 
 
 namespace Admin\Widget;
+use Admin\Api\ConfigApi;
 use Admin\Controller\AdminController;
 
 class PartialsWidget extends AdminController{
@@ -16,8 +17,9 @@ class PartialsWidget extends AdminController{
 	 */
 	public function config_set($group){
 		$map = array('group'=>$group);
-		$result = apiCall('Admin/Config/queryNoPaging',array($map));
+		$result = apiCall(ConfigApi::QUERY_NO_PAGING,array($map));
 		if($result['status']){
+            $this->assign("group",$group);
 			$this->assign("list",$result['info']);
 			echo $this->fetch("Widget/config_set");
 		}else{

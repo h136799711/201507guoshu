@@ -33,6 +33,20 @@
 		</div>
 
 	</div>
+    <include file="template/wxpicture" autoinit="true" />
+    <script type="text/javascript">
+        function config_set_get_data(){
+            $(".wxuploaderimg").each(function(index,item){
+                var data_id = $(item).attr("data-id");
+                $("#"+data_id).val($("img",item).attr("src"));
+            });
+
+            return false;
+        }
+        $(function(){
+
+        })
+    </script>
 </block>
 
 <block name="area_footer">

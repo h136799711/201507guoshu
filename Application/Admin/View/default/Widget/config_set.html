@@ -1,4 +1,4 @@
-<form action="{:U('Admin/Config/set')}" method="post" class="configSetForm col-lg-12 form-horizontal">
+<form action="{:U('Admin/Config/set')}" method="post" class="configSetForm{$group} col-lg-12 form-horizontal">
 	<volist name="list" id="config">
 		<div class="form-group">
 			<label class="control-label">{$config.title}</label>
@@ -47,23 +47,8 @@
 								<i class="fa fa-plus"></i>
 							</div>
 						</div>
-						
-						<include file="template/wxpicture" autoinit="true" />
-						<script type="text/javascript">
-							function config_set_get_data(){
-								$(".wxuploaderimg").each(function(index,item){
-//									console.log(item);
-									var data_id = $(item).attr("data-id");
-//									console.log(data_id);
-									$("#"+data_id).val($("img",item).attr("src"));
-								});
-								
-								return false;
-							}
-							$(function(){
-								
-							})
-						</script>
+
+
 								<!-- 图片选择DOM结构 -->
 					</case>
 				</switch>
@@ -76,7 +61,7 @@
 		<div class="controls">
 			<empty name="list">
 			<else/>
-				<button type="submit" onclick="return config_set_get_data();" class="btn btn-primary submit-btn ajax-post" target-form="configSetForm">{:L('BTN_SAVE')}</button>
+				<button type="submit" onclick="return config_set_get_data();" class="btn btn-primary submit-btn ajax-post" target-form="configSetForm{$group}">{:L('BTN_SAVE')}</button>
 			</empty>
 		</div>
 	</div>
