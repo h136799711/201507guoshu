@@ -14,6 +14,11 @@ class DatatreeApi extends Api{
 
 
     /**
+     * 获取信息
+     */
+    const GET_INFO = "Admin/Datatree/getInfo";
+
+    /**
      * 查询，不分页
      */
     const QUERY_NO_PAGING = "Admin/Datatree/queryNoPaging";

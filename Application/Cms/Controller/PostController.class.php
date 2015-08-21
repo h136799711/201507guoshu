@@ -6,13 +6,15 @@
 // | Copyright (c) 2013-2016, http://www.itboye.com. All Rights Reserved.
 // |-----------------------------------------------------------------------------------
 namespace Cms\Controller;
+use Admin\Api\DatatreeApi;
+use Admin\Api\PostApi;
 use Think\Controller;
 class PostController extends CmsController {
 	
     public function index(){
     		$map = array('parentid'=>getDatatree("POST_CATEGORY"));
 		
-		$cates = apiCall("Cms/Datatree/queryNoPaging",array($map));
+		$cates = apiCall(DatatreeApi::QUERY_NO_PAGING,array($map));
 		if(!$cates['status']){
 			$this->error($cates['info']);
 		}
@@ -24,8 +26,8 @@ class PostController extends CmsController {
 	public function cate(){
 		$cateid = I('get.cateid',0);
 		$map = array('post_category'=>$cateid,'post_status'=>'publish');
-		
-		$result = apiCall("Cms/Datatree/getInfo", array(array('id'=>$cateid)));
+
+		$result = apiCall(DatatreeApi::GET_INFO, array(array('id'=>$cateid)));
 		
 		if(!$result['status']){
 			$this->error($result['info']);
@@ -38,7 +40,7 @@ class PostController extends CmsController {
 		$this->assign("title",$result['info']['name']);
 		$page = array('curpage'=>I('get.p',0),'size'=>10);
 		
-		$result = apiCall("Cms/Post/query", array($map,$page));
+		$result = apiCall(PostApi::QUERY, array($map,$page));
 //		dump($result);
 		if(!$result['status']){
 			$this->error($result['info']);
@@ -48,7 +50,7 @@ class PostController extends CmsController {
 		$this->assign("show",$result['info']['show']);
 		
     		$map = array('parentid'=>getDatatree("POST_CATEGORY"));
-		$cates = apiCall("Cms/Datatree/queryNoPaging",array($map));
+		$cates = apiCall(DatatreeApi::QUERY_NO_PAGING,array($map));
 		if(!$cates['status']){
 			$this->error($cates['info']);
 		}
@@ -62,7 +64,7 @@ class PostController extends CmsController {
 	public function view(){
 		$id = I('get.id',0);
 		$map = array('id'=>$id);
-		$result = apiCall("Cms/Post/getInfo", array($map));
+		$result = apiCall(PostApi::GET_INFO, array($map));
 		if(!$result['status']){
 			$this->error($result['info']);
 		}

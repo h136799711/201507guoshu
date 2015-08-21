@@ -3,7 +3,6 @@ return array(
 
     'DB_TYPE'                   =>  'mysql',
     'DB_PORT'                   =>  '3306',
-    'DB_PREFIX'                 =>  'wytch_',
 	'DEFAULT_THEME'=>"default",
 	'TMPL_PARSE_STRING'  =>array(
      	'__CDN__' => __ROOT__.'/Public/cdn', // 更改默认的/Public 替换规则
