@@ -3,43 +3,61 @@
 
 <block name="area_header">
 
-	<link rel="stylesheet" type="text/css" media="all" href="__CDN__/jquery-datetimepicker/jquery.datetimepicker.css">
-	<script type="text/javascript" src="__CDN__/jquery-datetimepicker/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="__CDN__/jquery-datetimepicker/jquery.datetimepicker.css">
+    <script type="text/javascript" src="__CDN__/jquery-datetimepicker/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="__CDN__/amazeui/2.3.0/css/amazeui.min.css" />
+
 </block>
 
 <block name="area_body">
-	{:W('Menus/topbar')}
-	<div class="admin-main container-fluid">
-		{:W('Menus/left')}
-		<div class="admin-main-content">
-			{:W('Menus/breadcrumb')}
-			
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				
-				<div class="col-lg-4 col-md-4 col-sm-4 ">
-					待支付订单
-				</div>				
-				
-				<div class="col-lg-4 col-md-4 col-sm-4 ">
-					待发货订单				
-				</div>
-				
-				<div class="col-lg-4 col-md-4 col-sm-4 ">
-					已收货订单					
-				</div>
-				
-				<div class="col-lg-4 col-md-4 col-sm-4 ">
-					总金额0.00			
-				</div>
-				
-			</div>
-			
-		</div>
-		<!-- END admin-main-content -->
-	</div>
-		<!-- END admin-main-->
+    {:W('Menus/topbar')}
+    <div class="admin-main container-fluid">
+        {:W('Menus/left')}
+        <div class="admin-main-content">
+            {:W('Menus/breadcrumb')}
+            <div class="am-panel am-panel-secondary">
+            <div class="am-panel-hd">订单统计</div>
+            <div class="am-panel-bd">
+                <table class="am-table am-table-hover am-table-centered  am-table-bordered am-table-radius" style="text-align: center">
+                    <thead>
+                    <tr class="am-primary">
+                        <th  style="text-align: center">待确认订单</th>
+                        <th  style="text-align: center">待发货订单</th>
+                        <th  style="text-align: center">已发货订单</th>
+                        <th  style="text-align: center">已收货订单</th>
+                        <th  style="text-align: center">已退货订单</th>
+                        <th  style="text-align: center">已完成订单</th>
+                        <th  style="text-align: center">关闭订单</th>
+                        <th  style="text-align: center">退回订单</th>
+                        <th  style="text-align: center">总金额(元)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr style="">
+                        <td><a href="{:U('Admin/Orders/sure')}">{$order_status.order_tobe_confirmed}</a></td>
+                        <td><a href="{:U('Admin/Orders/deliverGoods')}">{$order_status.order_tobe_shipped}</a></td>
+                        <td><a href="{:U('Admin/Orders/deliverGoods',array('orderstatus'=>4))}">{$order_status.order_shipped}</a></td>
+                        <td><a href="{:U('Admin/Orders/index',array('orderstatus'=>5))}">{$order_status.order_receipt_of_goods}</a></td>
+                        <td><a href="{:U('Admin/Orders/index',array('orderstatus'=>6))}">{$order_status.order_returned}</a></td>
+                        <td><a href="{:U('Admin/Orders/index',array('orderstatus'=>7))}">{$order_status.order_completed}</a></td>
+                        <td><a href="{:U('Admin/Orders/index',array('orderstatus'=>8))}">{$order_status.order_cancel}</a></td>
+                        <td><a href="{:U('Admin/Orders/index',array('orderstatus'=>12))}">{$order_status.order_back}</a></td>
+                        <td>{$price}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+                </div>
+        </div>
+
+        </div>
+        <!-- END admin-main-content -->
+    </div>
+    <!-- END admin-main-->
 </block>
 
 <block name="area_footer">
 
 </block>
+

@@ -72,7 +72,82 @@ class OrdersController extends AdminController {
 	 * 统计
 	 */
 	public function statics(){
-		
+
+        //TODO:可能数据库写一个视图效率更高吧，之后考虑
+		//TODO:目前先是全表统计，之后可能考虑按时间，当天，本月，本年计算
+
+		/**
+         * 订单退回
+         */
+		$map=array(
+            'order_status'=> OrdersModel::ORDER_BACK,
+        );
+		$orderback=apiCall(OrdersApi::COUNT,array($map));
+		/**
+         * 待确认
+         */
+		$map=array(
+            'order_status'=>OrdersModel::ORDER_TOBE_CONFIRMED,
+        );
+		$ordertobeconfirmed=apiCall(OrdersApi::COUNT,array($map));
+		/**
+         * 待发货
+         */
+		$map=array(
+            'order_status'=> OrdersModel::ORDER_TOBE_SHIPPED,
+        );
+		$ordertobeshipped=apiCall(OrdersApi::COUNT,array($map));
+		/**
+         * 已发货
+         */
+		$map=array(
+            'order_status'=>OrdersModel::ORDER_SHIPPED,
+        );
+		$ordershipped=apiCall(OrdersApi::COUNT,array($map));
+		/**
+         * 已收货
+         */
+		$map=array(
+            'order_status'=>OrdersModel::ORDER_RECEIPT_OF_GOODS,
+        );
+		$orderreceiptofgoods=apiCall(OrdersApi::COUNT,array($map));
+		/**
+         * 已退货
+         */
+		$map=array(
+            'order_status'=> OrdersModel::ORDER_RETURNED,
+        );
+		$orderreturned=apiCall(OrdersApi::COUNT,array($map));
+		/**
+         * 已完成
+         */
+		$map=array(
+            'order_status'=>OrdersModel::ORDER_COMPLETED,
+        );
+		$ordercompleted=apiCall(OrdersApi::COUNT,array($map));
+		/**
+         * 取消或交易关闭
+         */
+		$map=array(
+            'order_status'=> OrdersModel::ORDER_CANCEL,
+        );
+		$ordercancel=apiCall(OrdersApi::COUNT,array($map));
+
+		$orderstatus=array(
+            'order_back'=>$orderback['info'],
+            'order_tobe_confirmed'=>$ordertobeconfirmed['info'],
+            'order_tobe_shipped'=>$ordertobeshipped['info'],
+            'order_shipped'=>$ordershipped['info'],
+            'order_receipt_of_goods'=>$orderreceiptofgoods['info'],
+            'order_returned'=>$orderreturned['info'],
+            'order_completed'=>$ordercompleted['info'],
+            'order_cancel'=>$ordercancel['info']
+        );
+		$map=array();
+		$price=apiCall(OrdersApi::SUM,array($map,"price"));
+
+		$this->assign('order_status',$orderstatus);
+		$this->assign('price',$price['info']);
 		$this->display();
 	}
 

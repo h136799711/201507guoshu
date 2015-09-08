@@ -17,10 +17,17 @@ use Shop\Model\OrdersModel;
 class OrdersApi extends Api
 {
 
+
+    /**
+     * 统计和
+     */
+    const SUM = "Shop/Orders/sum";
+
     /**
      * 假删除
      */
     const PRETEND_DELETE = "Shop/Orders/pretendDelete";
+
     /**
      * 添加
      */
