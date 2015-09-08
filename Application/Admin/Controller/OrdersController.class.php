@@ -258,7 +258,7 @@ class OrdersController extends AdminController {
 				$this -> assign("items", $result['info']);
 				
 				//查询订单状态变更纪录				
-				$result = apiCall(OrderStatusHistoryApi::QUERY_NO_PAGING, array(array('orders_id'=>$orderid),"create_time desc"));
+				$result = apiCall(OrderStatusHistoryApi::QUERY_NO_PAGING, array(array('orders_id'=>$id),"create_time desc"));
 				
 				if(!$result['status']){
 					ifFailedLogRecord($result, __FILE__.__LINE__);

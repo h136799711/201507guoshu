@@ -16,7 +16,9 @@ use Shop\Api\CategoryPropApi;
 use Shop\Api\ProductApi;
 use Shop\Api\ProductGroupApi;
 use Shop\Api\ProductSkuApi;
+use Shop\Api\SkuApi;
 use Shop\Api\StoreApi;
+use Tool\Api\ProvinceApi;
 
 class WxshopProductController extends AdminController {
 	
@@ -111,7 +113,7 @@ class WxshopProductController extends AdminController {
 			}
 			$this->assign("template_id",$result['info']['template_id']);
 			
-			$result = apiCall("Tool/Province/queryNoPaging", array(array('countryid'=>1017) ));
+			$result = apiCall(ProvinceApi::QUERY_NO_PAGING, array(array('countryid'=>1017) ));
 			if($result['status']){				
 				$this->assign("province",$result['info']);
 			}else{
@@ -201,7 +203,7 @@ class WxshopProductController extends AdminController {
 		if(IS_GET){
 			$id = I('get.id',0);
 			
-			$result = apiCall("Admin/Product/getInfo", array(array('id'=>$id) ));
+			$result = apiCall(ProductApi::GET_INFO, array(array('id'=>$id) ));
 			
 			if(!$result['status']){
 				$this->error($result['info']);
@@ -217,7 +219,7 @@ class WxshopProductController extends AdminController {
 				
 				$this->assign("skuinfo",$this->getSkuValue(json_decode($skuinfo,JSON_UNESCAPED_UNICODE)));
 				
-				$skulist = apiCall("Admin/ProductSku/queryNoPaging", array(array('product_id'=>$id)));
+				$skulist = apiCall(ProductSkuApi::QUERY_NO_PAGING, array(array('product_id'=>$id)));
 				if($skulist['status']){
 					$this->assign("skuvaluelist",json_encode($skulist['info'],JSON_UNESCAPED_UNICODE));
 				}
@@ -229,14 +231,14 @@ class WxshopProductController extends AdminController {
 			
 			$cate_id = $result['info']['cate_id'];
 
-			$result = apiCall("Admin/Sku/querySkuTable",array($cate_id));
+			$result = apiCall(SkuApi::QUERY_SKU_TABLE,array($cate_id));
 			
 			if($result['status']){
 				$this->assign("skulist",$this->color2First($result['info']));
 			}
 			
 			//SKU
-			$result = apiCall("Admin/Category/getInfo",array(array('id'=>$cate_id)));
+			$result = apiCall(CategoryApi::GET_INFO,array(array('id'=>$cate_id)));
 			if(!$result['status']){
 				$this->error($result['info']);
 			}
@@ -247,7 +249,7 @@ class WxshopProductController extends AdminController {
 			if(is_array($result['info'])){
 				$level = $result['info']['level'];
 				$parent = $result['info']['parent'];
-				$result = apiCall("Admin/Category/getInfo",array(array('id'=>$parent)));
+				$result = apiCall(CategoryApi::GET_INFO,array(array('id'=>$parent)));
 				if(!$result['status']){
 					$this->error($result['info']);
 				}
@@ -271,7 +273,7 @@ class WxshopProductController extends AdminController {
 					'has_sku'=>0,
 				);
 				
-				$result = apiCall("Admin/Product/saveByID", array($id,$entity));
+				$result = apiCall(ProductApi::SAVE_BY_ID, array($id,$entity));
 				
 				if(!$result['status']){
 					$this->error($result['info']);
