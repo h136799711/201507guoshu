@@ -410,7 +410,7 @@ class ProductController extends ShopController {
 		
 		$map = array();
 		$q = I('q','');
-		$page = array('curpage' => I('post.p', 0,'intval'), 'size' => 10);
+		$page = array('curpage' => I('p', 0,'intval'), 'size' => 10);
 		$order = " id desc ";
 		if ($sort == 's') {
 			$order = " price desc";
