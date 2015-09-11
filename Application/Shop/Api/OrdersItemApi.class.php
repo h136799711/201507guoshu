@@ -93,7 +93,7 @@ class OrdersItemApi extends Api
         //TODO: in 语句， 性能问题，需要修正
         $mapOrders['id'] = array('in', $orders_id_arr);
         // 已支付
-        $mapOrders['pay_status'] = OrdersModel::ORDER_PAID;
+//        $mapOrders['pay_status'] = OrdersModel::ORDER_PAID;
 
         $result = $model->where(array($mapOrders))->select();
 
