@@ -224,14 +224,18 @@ class OrdersController extends AdminController {
 	public function sure() {
 		$orderid = I('orderid', '');
 		$payStatus = I('payStatus', OrdersModel::ORDER_PAID);
-		
+        $payStatus = strval($payStatus);
 		$userid = I('uid', 0);
 		$params = array();
 		$map = array();
 		$map['order_status'] = OrdersModel::ORDER_TOBE_CONFIRMED;
-		if(!empty($payStatus)){
-			$map['pay_status'] = $payStatus;			
-		}
+        if($payStatus != 'all'){
+		    $map['pay_status'] = $payStatus;
+            $params['payStatus'] = $payStatus;
+        }else{
+            $params['payStatus'] = 'all';
+        }
+
 		
 		$map['wxaccountid']=getWxAccountID();
 		$page = array('curpage' => I('get.p', 0), 'size' => C('LIST_ROWS'));

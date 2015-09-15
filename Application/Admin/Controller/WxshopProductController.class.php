@@ -89,7 +89,6 @@ class WxshopProductController extends AdminController {
 			$id = I('get.id',0);
 			
 			$result = apiCall(ProductApi::GET_INFO, array(array('product_id'=>$productid) ));
-			
 			if(!$result['status']){
 				$this->error($result['info']);
 			}
@@ -142,8 +141,7 @@ class WxshopProductController extends AdminController {
 //						price	
 			$query = I('post.query','','htmlspecialchars_decode');
 			$query = json_decode($query,JSON_UNESCAPED_UNICODE);
-			
-//			dump($query);
+
 			
 			$productid = I('post.productid','');
 			if(empty($productid)){
@@ -183,7 +181,7 @@ class WxshopProductController extends AdminController {
 			
 //			dump($entity);
 			
-			$result = apiCall("Admin/Product/save", array(array('product_id'=>$productid),$entity));
+			$result = apiCall(ProductApi::SAVE, array(array('product_id'=>$productid),$entity));
 			
 			if(!$result['status']){
 				$this->error($result['info']);
