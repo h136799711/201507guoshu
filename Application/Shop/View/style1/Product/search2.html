@@ -183,7 +183,7 @@
 	
 		
 		<!--<a class="am-fl <eq name="sort" value="s">active</eq>" href="{:U('Shop/Product/search2',array('sort'=>'s','layout'=>$layout))}">综合</a>-->
-		<select class="am-fl" onchange="changeType(this.value)" style="margin-top:0.6rem; margin-left: 0.7rem; border: none;background:#EEFFF1;font-size: 0.5rem;padding: 0.2rem;">
+		<select class="am-fl" name="g_id" onchange="changeType(this.value)" style="margin-top:0.6rem; margin-left: 0.7rem; border: none;background:#EEFFF1;font-size: 0.5rem;padding: 0.2rem;">
 			<option value="0" 
 			<eq name="g_id" value="0">
 				selected="selected"
@@ -193,17 +193,17 @@
 				<option value="{$ft.id}" <eq name="g_id" value="$ft.id">selected="selected"</eq> >{$ft.name}</option>
 			</volist>
 		</select>
-		<a class="am-fl <eq name="sort" value="d">active</eq>" href="{:U('Shop/Product/search2',array('sort'=>'d','layout'=>$layout))}">销量</a>
+		<a class="am-fl <eq name="sort" value="d">active</eq>"  href="javascript:sales();">销量</a>
 		<if condition=" $sort eq 'pd' or $sort eq 's' or $sort eq 'd'">
-		<a class="am-fl" href="{:U('Shop/Product/search2',array('sort'=>'p','layout'=>$layout))}">价格<i class="am-icon-arrow-down am-text-xs"></i></a>
+		<a class="am-fl" href="javascript:price_up();">价格<i class="am-icon-arrow-down am-text-xs"></i></a>
 		</if>
 		<eq name="sort" value="p">	
-		<a class="am-fl" href="{:U('Shop/Product/search2',array('sort'=>'pd','layout'=>$layout))}">价格<i class="am-icon-arrow-up am-text-xs"></i></a>
+		<a class="am-fl" href="javascript:price_down();">价格<i class="am-icon-arrow-up am-text-xs"></i></a>
 		</eq>
 		<eq name="layout" value="list">
-		<a href="{:U('Shop/Product/search2',array('sort'=>$sort,'layout'=>'grid'))}" class="am-fl "><i class="am-icon-th-list"></i></a>
+		<a href="javascript:list_type('grid');" class="am-fl "><i class="am-icon-th-list"></i></a>
 		<else/>
-		<a href="{:U('Shop/Product/search2',array('sort'=>$sort,'layout'=>'list'))}" class="am-fl "><i class="am-icon-th-large"></i></a>
+		<a href="javascript:list_type('list');" class="am-fl "><i class="am-icon-th-large"></i></a>
 		</eq>
 	</div>
 	<div class="items-wrp {$layout}  am-cf" data-am-scrollspy="{animation:'fade'}"	data-am-scrollspy="{animation:'fade', delay: 300}">
@@ -230,6 +230,32 @@
 <block name="area_footer">
 	<include file="style1/partial/footermenu" />
 	<script type="text/javascript">
+
+        function sales(){
+            var g_id = "{$g_id}";
+            var link = "{:U('Shop/Product/search2',array('sort'=>'d'))}?g_id="+g_id+"&layout="+"{$layout}";
+            window.location.href = link;
+        }
+
+        function price_up(){
+            var g_id = "{$g_id}";
+            var link = "{:U('Shop/Product/search2',array('sort'=>'p'))}?g_id="+g_id+"&layout="+"{$layout}";
+            window.location.href = link;
+        }
+
+        function price_down(){
+            var g_id = "{$g_id}";
+            var link = "{:U('Shop/Product/search2',array('sort'=>'pd'))}?g_id="+g_id+"&layout="+"{$layout}";
+            window.location.href = link;
+        }
+
+        function list_type(layout){
+            var g_id = "{$g_id}";
+            var link = "{:U('Shop/Product/search2',array('sort'=>$sort))}?g_id="+g_id+"&layout="+layout;
+            window.location.href = link;
+        }
+
+        //============================================================================================
 		
 		function appendItem(item){
 			var $wrapper = $(".items-wrp");
@@ -255,6 +281,7 @@
 			}
 			var q = $(".header input[name='q']").val();
 			var type = $(".header select[name='type']").val();
+            var g_id  = $(".header select[name='g_id']").val();
 			window.ajaxing = false;
             var g_id = "{$g_id}";
 			$.ajax({

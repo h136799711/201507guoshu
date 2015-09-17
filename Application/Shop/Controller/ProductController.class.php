@@ -23,15 +23,41 @@ use Admin\Api\DatatreeApi;
 
 class ProductController extends ShopController {
 
+    /**
+     * 插入排序
+     * @param $arr
+     * @return mixed
+     */
+    function insert_sort($arr) {
+        for($i=1, $len=count($arr); $i<$len; $i++) {
+            //获得当前需要比较的元素值。
+            $tmp = $arr[$i];
+            //内层循环控制 比较 并 插入
+            for($j=$i-1;$j>=0;$j--) {
+                //$arr[$i];//需要插入的元素; $arr[$j];//需要比较的元素
+                if($tmp['_sales'] > $arr[$j]['_sales']) {
+                    //发现插入的元素要小，交换位置
+                    //将后边的元素与前面的元素互换
+                    $arr[$j+1] = $arr[$j];
+                    //将前面的数设置为 当前需要交换的数
+                    $arr[$j] = $tmp;
+                } else {
+                    break;
+                }
+            }
+        }
+        //返回
+        return $arr;
+    }
+
 	public function quickSort($left, $right, $arr) {
 		$l = $left;
 		$r = $right;
-		$pivot = $arr[($left + $right) / 2];
-		$temp = 0;
+		$pivot = $arr[intval(floor(($left + $right) / 2))];
+		$temp = array();
 
 		while ($l < $r) {
-			
-//			call_user_func_array($func_callback, array());
+
 			while (($arr[$l]['_sales']) > ($pivot['_sales'])) {
 				$l++;
 			}
@@ -55,6 +81,7 @@ class ProductController extends ShopController {
 			$l++;
 			$r--;
 		}
+
 		if ($left < $r) {
 			return $this->quickSort($left, $r, $arr);
 		} elseif ($right > $l) {
@@ -465,7 +492,17 @@ class ProductController extends ShopController {
 				);
 			}
 			$map['onshelf']=1;
-			$result=apiCall(ProductGroupApi::GROUP_WITH_PRODUCT,array($map));
+            $price_order = '';
+            if ($sort == 's') {
+                $price_order = "desc";
+            }
+            if ($sort == 'p') {
+                $price_order = "desc";
+            }
+            if ($sort == 'pd') {
+                $price_order = "asc";
+            }
+			$result=apiCall(ProductGroupApi::GROUP_WITH_PRODUCT,array($map,$price_order));
 		}else{
 			$result = apiCall(ProductApi::QUERY_WITH_STORE, array($q,$type, $page, $order, $params));
 		}
@@ -489,8 +526,8 @@ class ProductController extends ShopController {
 //			dump($list);
 			if ($sort == 'd') {
 				//对销量进行排序
-				$list = ($this->quickSort(0, count($list)-1,  $list));
-				
+//				$list = ($this->quickSort(0, count($list)-1,  $list));
+				$list = $this->insert_sort($list);
 			}
 		}
 		

@@ -57,9 +57,15 @@ class ProductGroupApi extends  Api{
 	/**
 	 * 关联product和product_group查询
 	 */
-	public function groupWithProduct($map){
+	public function groupWithProduct($map,$price_order=''){
 		$query=$this->model;
-		$result=$query->where($map)->alias('a')->join('LEFT JOIN __PRODUCT__ b ON a.p_id = b.id')->select();		
+        if(empty($price_order)){
+            $result=$query->where($map)->alias('a')->join('LEFT JOIN __PRODUCT__ b ON a.p_id = b.id')->select();
+        }elseif($price_order == 'desc'){
+            $result=$query->where($map)->alias('a')->join('LEFT JOIN __PRODUCT__ b ON a.p_id = b.id')->order(' b.price desc')->select();
+        }else{
+            $result=$query->where($map)->alias('a')->join('LEFT JOIN __PRODUCT__ b ON a.p_id = b.id')->order(' b.price asc')->select();
+        }
 		if ($result === false) {
 			$error = $this -> model -> getDbError();
 			return $this -> apiReturnErr($error);
