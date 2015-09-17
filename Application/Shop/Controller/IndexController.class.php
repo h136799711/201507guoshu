@@ -152,13 +152,14 @@ class IndexController extends ShopController{
 		$result=apiCall(DatatreeApi::QUERY_NO_PAGING,array($map));
 		$this->assign("flashSale",$result['info']);
 		$order=" end_time asc";
+
 		$map=array(
 			'g_id'=>40,
 			'start_time'=>array(
-				'LT',time()
+				'LT',strtotime(date("Y-M-d",time()))
 			),
 			'end_time'=>array(
-				'GT',time()
+				'GT',(strtotime(date("Y-M-d",time()))+24*3600)
 			),
 		);
 		$result=apiCall(ProductGroupApi::QUERY_NO_PAGING,array($map,$order));
@@ -169,9 +170,16 @@ class IndexController extends ShopController{
 		}
 		$map=array(
 			'g_id'=>40,
-			'start_time'=>array(
-				'BETWEEN',array(strtotime(date("y-m-d",time()))+3600*24,strtotime(date("y-m-d",time()))+3600*24*7),
-			),
+//			'start_time'=>array(
+//				'BETWEEN',array(strtotime(date("y-m-d",time()))+3600*24,strtotime(date("y-m-d",time()))+3600*24*7),
+//			),
+
+            'start_time'=>array(
+                'LT',time()
+            ),
+            'end_time'=>array(
+                'GT',time()
+            ),
 		);
 		$result=apiCall(ProductGroupApi::QUERY_NO_PAGING,array($map,$order));
 		if($result['info']==null){
