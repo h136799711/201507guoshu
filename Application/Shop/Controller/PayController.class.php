@@ -163,7 +163,7 @@ class PayController extends ShopController {
 			//dump($payConfig);
             $this -> assign("total_express", $total_express);
             $this -> assign("ids", I('get.id', 0));
-            $this -> assign("total_fee", ($total_fee + $total_express));
+            $this -> assign("total_fee", $total_fee);
             $this -> theme($this->themeType) -> display();
 
         } else {
