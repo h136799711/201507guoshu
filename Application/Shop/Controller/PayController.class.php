@@ -135,7 +135,9 @@ class PayController extends ShopController {
 
                 $products = $this -> getProducts($order[id]);
                 foreach ($products as $vo) {
-                    $total_express = $vo['post_price'];
+                    if($vo['post_price'] > $total_express){
+                        $total_express = $vo['post_price'];
+                    }
                     if(empty($body)){
                         $body = $vo['name'];
                     }
