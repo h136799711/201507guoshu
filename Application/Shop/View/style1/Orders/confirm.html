@@ -1,4 +1,4 @@
-<extend name="template/base_index2" />
+<extend name="template/base_index2" xmlns="http://www.w3.org/1999/html"/>
 
 <block name="area_header">
 	<style type="text/css">
@@ -174,11 +174,11 @@
 			</div>
 
 		</form>
-		
-		
-		<div class="footer-menu am-text-right  am-padding-sm">合计<span class="am-text-danger">¥<span class="js_total_price " >{:number_format($list['all_price']+$list['all_express'],2)}元&nbsp;<if condition="$list['all_express'] gt 0">含运费：{:number_format($list['all_express'],2)}元</if></span></span>
-			<a href="{:U('Shop/Orders/save')}" onclick="return check();" target-form="js_order_form" class="ajax-post am-btn am-btn-sm am-btn-danger">确认</a>
-		</div>
+
+
+        <div class="footer-menu am-text-right  am-padding-sm">合计<span class="am-text-danger">¥<span class="js_total_price " >{:number_format($list['all_price']+$list['all_express'],2)}元&nbsp;<if condition=" $dnotNeedPostPrice gt 0 "> <span class="js_total_price " >满{$dnotNeedPostPrice}元包邮 </span></if><if condition="$list['all_express'] gt 0">含运费：{:number_format($list['all_express'],2)}元</if></span></span>
+            <a href="{:U('Shop/Orders/save')}" onclick="return check();" target-form="js_order_form" class="ajax-post am-btn am-btn-sm am-btn-danger">确认</a>
+        </div>
 	</div>
 	
 	

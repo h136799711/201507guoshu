@@ -215,6 +215,10 @@ class OrdersController extends ShopController {
 	 * TODO: 暂不支持运费模板的运费计算
 	 */
 	public function confirm() {
+        //1. 20151011 何必都 增加满多少包邮，全场所有店铺(BETA)
+        $dnotNeedPostPrice = C('DNOT_NEED_POST_PRICE');
+        $dnotNeedPostPrice = floatval($dnotNeedPostPrice);
+
         //标识是否直接从session中取订单确认信息
 		$fromsession = I('get.fromsession', 0);
 		$p_id_arr = I('post.p_id', array());
@@ -314,11 +318,17 @@ class OrdersController extends ShopController {
 				$express_price = $this -> getExpressPrice($vo);
 				$express_price = $express_price / 100.0;
 				//转化为元
-				//取得最大的运费
 
 				$entity['post_price'] = $express_price;
-				$tmp_store[$vo['storeid']]['post_price'] += $express_price;
-				$all_express += $express_price;
+//                $tmp_store[$vo['storeid']]['post_price'] ＋= $express_price;
+                //不累计
+                if($tmp_store[$vo['storeid']]['post_price'] < $express_price){
+                    //减去原来的加上现在的
+                    $all_express = $all_express  - $tmp_store[$vo['storeid']]['post_price'] + $express_price;
+                    //取最大
+				    $tmp_store[$vo['storeid']]['post_price'] = $express_price;
+                }
+
 
 				array_push($tmp_store[$vo['storeid']]['products'], $entity);
 				array_push($store_ids, $vo['storeid']);
@@ -344,6 +354,14 @@ class OrdersController extends ShopController {
 
 			session("confirm_order_info", $list);
 		}
+
+//        dump($list);
+        $this->assign("dnotNeedPostPrice",0);
+
+        if(floatval($list['all_price']) > $dnotNeedPostPrice){
+            $list['all_express'] = 0;
+            $this->assign("dnotNeedPostPrice",$dnotNeedPostPrice);
+        }
 
 		//获取默认收货地址
 

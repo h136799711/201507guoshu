@@ -132,20 +132,26 @@ class PayController extends ShopController {
             foreach ($order_list as $order) {
                 $trade_no = $order['orderid'];
                 $total_fee +=($order['price']);
-
+                $order_express = 0;
                 $products = $this -> getProducts($order[id]);
                 foreach ($products as $vo) {
-                    if($vo['post_price'] > $total_express){
-                        $total_express = $vo['post_price'];
+                    if($order_express < $vo['post_price']){
+                        $order_express = $vo['post_price'];
                     }
                     if(empty($body)){
                         $body = $vo['name'];
                     }
                 }
+
+                $total_express += $order_express;
                 $attach .= $order['id'].'_';
                 array_push($items, $item);
             }
-			
+            $dnotNeedPostPrice = C('DNOT_NEED_POST_PRICE');
+            $dnotNeedPostPrice = floatval($dnotNeedPostPrice);
+            if(floatval($total_fee) > $dnotNeedPostPrice){
+                $total_express = 0;
+            }
             $total_fee = $total_fee + $total_express;
             if ($total_fee <= 0) {
                 $this -> error("支付金额不能小于0！");
@@ -159,8 +165,9 @@ class PayController extends ShopController {
                 $body = date("Y-m-d",time())."购买商品";
             }
             $body = mb_substr($body,0,31,'utf-8');
+
             //测试时
-           $this -> setWxpayConfig($payConfig, $trade_no, $body, $total_fee,$attach);
+            $this -> setWxpayConfig($payConfig, $trade_no, $body, $total_fee,$attach);
 			
 			//dump($payConfig);
             $this -> assign("total_express", $total_express);
