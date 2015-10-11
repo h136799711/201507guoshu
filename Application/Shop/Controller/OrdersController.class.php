@@ -358,7 +358,7 @@ class OrdersController extends ShopController {
 //        dump($list);
         $this->assign("dnotNeedPostPrice",0);
 
-        if(floatval($list['all_price']) > $dnotNeedPostPrice){
+        if(floatval($list['all_price']) >= $dnotNeedPostPrice){
             $list['all_express'] = 0;
             $this->assign("dnotNeedPostPrice",$dnotNeedPostPrice);
         }
@@ -424,15 +424,17 @@ class OrdersController extends ShopController {
 				$entity['items'] = $vo;
 				//
 				$price = 0.0;
+
 				foreach ($vo['products'] as $item) {
 //					addWeixinLog($item,'订单［test］');
 					$price += ($item['price'] * intval($item['count']));
+                    $post_price += $item['post_price'];
 				}
 
 				$entity['price'] = $price;
+
 				if ($i < count($notes)) {
 					$entity['note'] = $notes[$i];
-
 				}
 
 				$i++;

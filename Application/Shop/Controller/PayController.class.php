@@ -149,9 +149,11 @@ class PayController extends ShopController {
             }
             $dnotNeedPostPrice = C('DNOT_NEED_POST_PRICE');
             $dnotNeedPostPrice = floatval($dnotNeedPostPrice);
-            if(floatval($total_fee) > $dnotNeedPostPrice){
+            if(floatval($total_fee) >= $dnotNeedPostPrice*100.0){
                 $total_express = 0;
             }
+//            dump($total_fee);
+//            dump($total_express);
             $total_fee = $total_fee + $total_express;
             if ($total_fee <= 0) {
                 $this -> error("支付金额不能小于0！");
