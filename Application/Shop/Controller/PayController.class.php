@@ -135,7 +135,7 @@ class PayController extends ShopController {
 
                 $products = $this -> getProducts($order[id]);
                 foreach ($products as $vo) {
-                    $total_express += $vo['post_price'];
+                    $total_express = $vo['post_price'];
                     if(empty($body)){
                         $body = $vo['name'];
                     }
@@ -156,7 +156,7 @@ class PayController extends ShopController {
             if(empty($body)){
                 $body = date("Y-m-d",time())."购买商品";
             }
-			
+            $body = mb_substr($body,0,31,'utf-8');
             //测试时
            $this -> setWxpayConfig($payConfig, $trade_no, $body, $total_fee,$attach);
 			
