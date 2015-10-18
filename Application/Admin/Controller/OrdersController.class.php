@@ -287,15 +287,16 @@ class OrdersController extends AdminController {
 
 		if($orderStatus != ''){
 			$map['order_status'] = $orderStatus;
-			$params['order_status'] = $orderStatus;
+			$params['orderstatus'] = $orderStatus;
 		}
-
+//        dump($map);
+//        dump('OrderStatus='.$orderStatus);
 		//		$map['createtime'] = array( array('EGT', $startdatetime), array('elt', $enddatetime), 'and');
 //		$map['pay_status'] = OrdersModel::ORDER_PAID;
 		
-		$map['pay_status'] = array(array('eq',OrdersModel::ORDER_CASH_ON_DELIVERY),array('eq',OrdersModel::ORDER_PAID), 'or');
+//		$map['pay_status'] = array(array('eq',OrdersModel::ORDER_CASH_ON_DELIVERY),array('eq',OrdersModel::ORDER_PAID), 'or');
 		$page = array('curpage' => I('get.p', 0), 'size' => C('LIST_ROWS'));
-		$order = " pay_status Asc";
+		$order = " pay_status Asc,createtime desc";
 
 		if ($userid > 0) {
 			$map['wxuser_id'] = $userid;
@@ -303,7 +304,7 @@ class OrdersController extends AdminController {
 
 		//
 		$result = apiCall(OrdersInfoViewApi::QUERY, array($map, $page, $order, $params));
-
+//        dump($result);
 		//
 		if ($result['status']) {
 			$this -> assign('orderid', $orderid);
