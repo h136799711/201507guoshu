@@ -134,7 +134,7 @@ class IndexController extends ShopController{
         $this->assign("isDistributor",$this->isDistributor());
 		$page = array(
 			'curpage'=>0,
-			'size'=>4
+			'size'=>8
 		);
 		//$order = "createtime asc";
 	  	$map= array(
@@ -227,7 +227,7 @@ class IndexController extends ShopController{
 	 * 
 	 */
 	 private function getFourGrid(){
-		$page = array('curpage'=>0,'size'=>4);
+		$page = array('curpage'=>0,'size'=>8);
 	 	$map = array('position'=>getDatatree("INDEX_4_ACTIVTIY"));
 		$order = " id desc";
 		$result = apiCall(BannersApi::QUERY, array($map,$page,$order));

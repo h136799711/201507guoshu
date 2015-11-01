@@ -379,13 +379,14 @@
 
 						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg?V=1.0" data-original="{$vo.iconurl}" class="lazy" alt="{$vo.name}"/></div>
 							<if condition="$vo.id eq 41">
-								<i class="zk" style="background: purple;">今日抢购</i>
+								<i class="zk" style="background: purple;">限时抢购</i>
 								<eq name="flashSaleTime" value="-1">
 									<div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
 									<div class="div_time" data-until="{$flashSaleTime}" style="color: #ffffff;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;"></div>
-								</eq>
+
+                                </eq>
 								<else />
-								<i class="zk" style="background: #FF499D;">本周抢购</i>
+								<i class="zk" style="background: #FF499D;">限时抢购</i>
 								<eq name="flashSaleWeekTime" value="-1">
 									<div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
 									<else />
