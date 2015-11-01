@@ -470,27 +470,32 @@ class ProductController extends ShopController {
 						'between',array(strtotime(date("y-m-d",time()))+3600*24,strtotime(date("y-m-d",time()))+3600*24*$days),
 					),
 				);
-			}else if($gid==getDatatree("SUPER_DISCOUNT")){
-				$map=array(
-					'g_id'=>getDatatree("SUPER_DISCOUNT"),
-				);
-			}else if($gid==getDatatree("FRUIT_BOX")){
-				$map=array(
-					'g_id'=>getDatatree("FRUIT_BOX"),
-				);
-			}else if($gid==getDatatree("FRUIT_JUICE")){
-				$map=array(
-					'g_id'=>getDatatree("FRUIT_JUICE"),
-				);
-			}else if($gid==getDatatree("CURRENT_SEASON_FRUIT")){
-				$map=array(
-					'g_id'=>getDatatree("CURRENT_SEASON_FRUIT"),
-				);
-			}else if($gid==getDatatree("IMPORT_BOUTIQUE")){
-				$map=array(
-					'g_id'=>getDatatree("IMPORT_BOUTIQUE"),
-				);
-			}
+			}else{
+                $map=array(
+                    'g_id'=>$gid,
+                );
+            }
+//        } if($gid==getDatatree("SUPER_DISCOUNT")){
+//				$map=array(
+//					'g_id'=>getDatatree("SUPER_DISCOUNT"),
+//				);
+//			}else if($gid==getDatatree("FRUIT_BOX")){
+//				$map=array(
+//					'g_id'=>getDatatree("FRUIT_BOX"),
+//				);
+//			}else if($gid==getDatatree("FRUIT_JUICE")){
+//				$map=array(
+//					'g_id'=>getDatatree("FRUIT_JUICE"),
+//				);
+//			}else if($gid==getDatatree("CURRENT_SEASON_FRUIT")){
+//				$map=array(
+//					'g_id'=>getDatatree("CURRENT_SEASON_FRUIT"),
+//				);
+//			}else if($gid==getDatatree("IMPORT_BOUTIQUE")){
+//				$map=array(
+//					'g_id'=>getDatatree("IMPORT_BOUTIQUE"),
+//				);
+//			}
 			$map['onshelf']=1;
             $price_order = '';
             if ($sort == 's') {
