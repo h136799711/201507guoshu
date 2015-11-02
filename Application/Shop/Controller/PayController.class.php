@@ -160,7 +160,7 @@ class PayController extends ShopController {
             }
 
             if(APP_DEBUG){
-			    $total_fee = 1;
+//			    $total_fee = 1;
             }
 
             if(empty($body)){

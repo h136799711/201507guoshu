@@ -88,8 +88,8 @@
 				</p>
 			</div>
 			<ul class="am-avg-sm-3 am-list p-extra lgray">
-				<li class="am-text-left" ><if condition="$product['attrext_ispostfree'] eq 1" >包邮<else/>{$express_str}</if></li>
-				 
+                <li class="am-text-left am-text-danger" ><if condition="$product['attrext_ispostfree'] eq 1" >包送<else/>{$express_str}<br /><span  style="color: #ff4400;font-weight: 700;font-size: 12px;">满{:C('DNOT_NEED_POST_PRICE')}元包送 </span></if></li>
+
 				<li class="am-text-center">月销：{$monthlySales}</li>
 				<li class="am-text-right">{$product.loc_city}</li>
 			</ul>
