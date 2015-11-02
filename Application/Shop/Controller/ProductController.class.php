@@ -450,25 +450,30 @@ class ProductController extends ShopController {
 		}
 		$this -> assign("g_id",$gid);
 		$params = false;
+        $now = time();
 		
 		if($gid!=""){
-			if($gid==getDatatree("TODAY_PURCHASE")){
+			if($gid == getDatatree("TODAY_PURCHASE")){
 				$map=array(
 					'g_id'=>getDatatree("FLASH_SALE"),
 					'start_time'=>array(
-						'lt',time()
-					),
-					'end_time'=>array(
-						'gt',time()
-					),
+                        'LT',$now
+                    ),
+                    'end_time'=>array(
+                        array('gt',$now),array('lt',$now+24*3600,)
+                    )
 				);
-			}else if($gid==getDatatree("WEEK_PURCHASE")){
-				$days=7-(float)date('N',time());
+
+			}else if($gid == getDatatree("WEEK_PURCHASE")){
+
 				$map=array(
 					'g_id'=>getDatatree("FLASH_SALE"),
-					'start_time'=>array(
-						'between',array(strtotime(date("y-m-d",time()))+3600*24,strtotime(date("y-m-d",time()))+3600*24*$days),
-					),
+                    'start_time'=>array(
+                        array('lt',$now,)
+                    ),
+                    'end_time'=>array(
+                        array('gt',$now + 24*3600),array('lt',$now + 7*24*3600,)
+                    )
 				);
 			}else{
                 $map=array(

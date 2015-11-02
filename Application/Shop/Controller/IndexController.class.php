@@ -153,43 +153,57 @@ class IndexController extends ShopController{
 		$this->assign("flashSale",$result['info']);
 		$order=" end_time asc";
 
-		$map=array(
-			'g_id'=>40,
-			'start_time'=>array(
-				'LT',strtotime(date("Y-M-d",time()))
-			),
-			'end_time'=>array(
-				'GT',(strtotime(date("Y-M-d",time()))+24*3600)
-			),
-		);
-		$result=apiCall(ProductGroupApi::QUERY_NO_PAGING,array($map,$order));
+        $now = time();
+        $map=array(
+            'g_id'=>getDatatree("FLASH_SALE"),
+            'start_time'=>array(
+                'LT',$now
+            ),
+            'end_time'=>array(
+                array('gt',$now),array('lt',$now+24*3600,)
+            )
+        );
+        $end_time = -1;
+		$result=apiCall(ProductGroupApi::GET_INFO,array($map,$order));
 		if($result['info']==null){
 			$this->assign("flashSaleTime",'-1');
 		}else{
-			$this->assign("flashSaleTime",$result['info'][0]['end_time']);
+            $end_time = $result['info']['end_time'];
+            if($end_time < $now){
+                $end_time = -1;
+            }
+			$this->assign("flashSaleTime",$end_time);
 		}
-		$map=array(
-			'g_id'=>40,
-			'start_time'=>array(
-				'BETWEEN',array(strtotime(date("y-m-d",time()))+3600*24,strtotime(date("y-m-d",time()))+3600*24*7),
-			),
 
-//            'start_time'=>array(
-//                'LT',time()
-//            ),
-//            'end_time'=>array(
-//                'GT',time()
-//            ),
-		);
-		$result=apiCall(ProductGroupApi::QUERY_NO_PAGING,array($map,$order));
-		if($result['info']==null){
+        $map=array(
+            'g_id'=>getDatatree("FLASH_SALE"),
+            'start_time'=>array(
+                array('lt',$now,)
+            ),
+            'end_time'=>array(
+                array('gt',$now + 24*3600),array('lt',$now + 7*24*3600,)
+            )
+        );
+
+		$result=apiCall(ProductGroupApi::GET_INFO,array($map,$order));
+		if($result['info'] == null){
 			$this->assign("flashSaleWeekTime",'-1');
 		}else{
-			$this->assign("flashSaleWeekTime",$result['info'][0]['start_time']);
+            $end_time = $result['info']['end_time'];
+            if($end_time < $now){
+                $end_time = -1;
+            }
+			$this->assign("flashSaleWeekTime",$end_time);
 		}
 		
 		$this->theme($this->themeType)->display();
 	}
+
+
+
+
+
+
 
 
 

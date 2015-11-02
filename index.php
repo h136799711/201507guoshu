@@ -14,7 +14,6 @@ define("PROJECT_NAME","201507shuiguo");
 
 // 是否调试模式
 define('APP_DEBUG', TRUE);
-
 // 插件目录
 define('ADDON_PATH', './Addons/');
 

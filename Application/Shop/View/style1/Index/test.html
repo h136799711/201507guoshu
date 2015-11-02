@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <!-- 脚本 -->
+    <script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 商城全局样式 -->
+    <script type="text/javascript" src="__JS__/sco.countdown2.js"></script>
+
+</head>
+<body >
+
+<span class="js_countdown" data-until="1448865513">1448865513</span>
+
+<script type="text/javascript">
+    $(function() {
+
+            var until = $(".js_countdown").data("until");
+        console.log(until);
+            until = parseInt(until);
+
+            $(".js_countdown").scojs_countdown({until: until});
+
+    });
+</script>
+</body>
+</html>
+

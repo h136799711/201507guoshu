@@ -190,6 +190,7 @@
 		<script type="text/javascript" src="__CDN__/flexible/flexible.js?v=__APP_VERSION__"></script>
 		<script type="text/javascript" src="__CDN__/flexible/makegrid.js?v=__APP_VERSION__"></script>
 	<script type="text/javascript" src="__CDN__/amazeui-lazyload/1.9.3/amazeui.lazyload.min.js"  ></script>
+        <script type="text/javascript" src="__JS__/sco.countdown2.js"></script>
 	
 
         <style type="text/css">
@@ -308,7 +309,7 @@
                 color: green;
             }
         </style>
-        <script type="text/javascript" src="__CDN__/sco1.0.2-8/js/sco.countdown2.js"></script>
+
 </head>
 <body class="theme-default theme-shop am-hide" >
 
@@ -354,51 +355,71 @@
 		</if>
 	</div>
 	
-	<div class="am-text-center" style="margin: 0.2rem 0;background: #ccc;color: white; padding: 10px; border-bottom: 1px solid #E2CCCC;">限时抢购</div>
-	<!--<div class="grid flashSale">-->
+	<div class="am-text-center" style="margin: 0.2rem 0;background: #ccc;color: white; padding: 10px; border-bottom: 1px solid #E2CCCC;">限时抢购
+
+    </div>
+
+
 	<div class="product-list grid">
-		<volist name="flashSale" id="vo">
-				
+
 				<div class="product-wrp col-6">
 					<div class="product-item">
 
-                        <a id="a_{$vo.id}"
-                        <if condition="$vo.id eq 41">
-                            <eq name="flashSaleTime" value="-1">
+                        <a id="a_{$flashSale[0]['id']}" <eq name="flashSaleTime" value="-1">
                                 href="javascript:void(0)"
                                 <else />
-                                href="{:U('Shop/Product/search2',array('g_id'=>$vo['id']))}"
-                            </eq>
+                                href="{:U('Shop/Product/search2',array('g_id'=>getDatatree("TODAY_PURCHASE")))}"
+                            </eq> >
+
+						<div class="p-main-img" >
+                            <img src="__IMG__/p240x240.jpg?V=1.0" data-original="{$flashSale[0]['iconurl']}" class="lazy" alt="{$flashSale[0]['name']}"/>
+                        </div>
+
+                        <i class="zk" style="background: purple;">限时抢购</i>
+
+                        <neq name="flashSaleTime" value="-1">
+                            <div class="js_countdown" data-until="{$flashSaleTime}" style="color: #ffffff;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;">0</div>
+
                             <else />
-                            <eq name="flashSaleWeekTime" value="-1">
-                                href="javascript:void(0)"
-                                <else />
-                                href="{:U('Shop/Product/search2',array('g_id'=>$vo['id']))}"
-                            </eq>
-                        </if> >
+                            <div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
+                        </neq>
 
-						<div class="p-main-img" ><img src="__IMG__/p240x240.jpg?V=1.0" data-original="{$vo.iconurl}" class="lazy" alt="{$vo.name}"/></div>
-							<if condition="$vo.id eq 41">
-								<i class="zk" style="background: purple;">限时抢购</i>
-								<eq name="flashSaleTime" value="-1">
-									<div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
-									<div class="div_time" data-until="{$flashSaleTime}" style="color: #ffffff;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;"></div>
-
-                                </eq>
-								<else />
-								<i class="zk" style="background: #FF499D;">限时抢购</i>
-								<eq name="flashSaleWeekTime" value="-1">
-									<div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
-									<else />
-									<div class="div_time2" data-until="{$flashSaleWeekTime}" style="
-    color: #ffffff;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;"></div>
-								</eq>
-							</if>
 						</a>
-					</div>
-				</div>
-		</volist>
-	</div>	
+                    </div>
+                </div>
+        <!-- 1 -->
+
+        <div class="product-wrp col-6">
+            <a id="a_{$flashSale[1].id}"
+            <eq name="flashSaleWeekTime" value="-1">
+                href="javascript:void(0)"
+                <else />
+                href="{:U('Shop/Product/search2',array('g_id'=>getDatatree("WEEK_PURCHASE")))}"
+            </eq>
+            >
+            <div class="product-item">
+
+
+                <div class="p-main-img" >
+                    <img src="__IMG__/p240x240.jpg?V=1.0" data-original="{$flashSale[1]['iconurl']}" class="lazy" alt="{$flashSale[1]['name']}"/>
+                </div>
+
+                <i class="zk" style="background: purple;">限时抢购</i>
+
+                <neq name="flashSaleWeekTime" value="-1">
+                    <div class="js_countdown" data-until="{$flashSaleWeekTime}" style="color: #ffffff;position:absolute;margin-top:-3.5rem;margin-left:1.3rem;">0</div>
+                 <else/>
+                    <div style="width:4.3rem; height: 3.6rem; background: black;opacity:0.5;position:relative;z-index: 20;margin-top: -3.6rem;margin-left:-0.1rem ;text-align: center;line-height: 3.6rem;font-size: 0.8rem;font-family: '微软雅黑';">暂无抢购</div>
+                </neq>
+            </div>
+
+            </a>
+        </div>
+        <!-- 2 -->
+
+	</div>
+
+<!-- 3 -->
 	
 	<div class="demo">
                       <!--
@@ -472,8 +493,19 @@
 		  </a>
 		</div>
 		
-	
 	<script type="text/javascript">
+        $(function() {
+
+            $(".js_countdown").each(function(index,item){
+                var until = $(this).data("until");
+                until = parseInt(until);
+                $(this).scojs_countdown({until: until});
+            })
+
+        });
+    </script>
+	<script type="text/javascript">
+
 			function appendItem(item){
 				//TODO: 首页商品加载
 			}
@@ -517,6 +549,9 @@
 	
 	
 		$(function(){
+
+
+
             $("body.am-hide").removeClass("am-hide");
 
 //			$(".start-page").height($(window).height());
@@ -539,18 +574,8 @@
 //				console.log(ev);
 			});
 			
-			
-		//	var thid = $('#thid').val();
-	    	var until = $(".div_time").data("until");
-	    	until = parseInt(until);
-	    	//thid = parseInt(thid);
-	    	$(".div_time").scojs_countdown({until: until});
-	    	
-	    	var until2 = $(".div_time2").data("until");
-	    	until2 = parseInt(until2);
-	    	//alert(until2);
-	    	//thid = parseInt(thid);
-	    	$(".div_time2").scojs_countdown({until: until2});
+
+
 
 		})
 		
