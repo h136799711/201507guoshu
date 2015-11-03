@@ -91,13 +91,14 @@
 					$(".openid").text(txt);
 				}
 				var markup = '<div><img style="width:20px" class="avatar" src="' + repo.avatar + '" /> ' + repo.nickname + '</div>';
-				return markup;
+
+                return $(markup);
 			},
 			templateResult: function(repo) {
 				if (repo.loading) return repo.text;
 				if (repo.nodata) return repo.nodata;
 				var markup = '<div><img style="width:40px" class="avatar" src="' + repo.avatar + '" /> ' + repo.nickname + '</div>';
-				return markup;
+				return $(markup);
 			},
 		});
 	</script>
