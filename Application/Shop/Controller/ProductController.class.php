@@ -436,7 +436,7 @@ class ProductController extends ShopController {
 		}
 		
 		$map = array();
-		$q = I('q','');
+		$q = I('param.q','');
 		$page = array('curpage' => I('p', 0,'intval'), 'size' => 10);
 		$order = " id desc ";
 		if ($sort == 's') {
@@ -480,27 +480,6 @@ class ProductController extends ShopController {
                     'g_id'=>$gid,
                 );
             }
-//        } if($gid==getDatatree("SUPER_DISCOUNT")){
-//				$map=array(
-//					'g_id'=>getDatatree("SUPER_DISCOUNT"),
-//				);
-//			}else if($gid==getDatatree("FRUIT_BOX")){
-//				$map=array(
-//					'g_id'=>getDatatree("FRUIT_BOX"),
-//				);
-//			}else if($gid==getDatatree("FRUIT_JUICE")){
-//				$map=array(
-//					'g_id'=>getDatatree("FRUIT_JUICE"),
-//				);
-//			}else if($gid==getDatatree("CURRENT_SEASON_FRUIT")){
-//				$map=array(
-//					'g_id'=>getDatatree("CURRENT_SEASON_FRUIT"),
-//				);
-//			}else if($gid==getDatatree("IMPORT_BOUTIQUE")){
-//				$map=array(
-//					'g_id'=>getDatatree("IMPORT_BOUTIQUE"),
-//				);
-//			}
 			$map['onshelf']=1;
             $price_order = '';
             if ($sort == 's') {
@@ -512,8 +491,12 @@ class ProductController extends ShopController {
             if ($sort == 'pd') {
                 $price_order = "asc";
             }
+            if(!empty($q)){
+               // $map['q'] = array('like','%'.$q.'%');
+            }
 			$result=apiCall(ProductGroupApi::GROUP_WITH_PRODUCT,array($map,$price_order));
 		}else{
+
 			$result = apiCall(ProductApi::QUERY_WITH_STORE, array($q,$type, $page, $order, $params));
 		}
 		if (!$result['status']) {

@@ -313,14 +313,14 @@
 </head>
 <body class="theme-default theme-shop am-hide" >
 
-<div class="div_search">
-    <form>
+<div class="div_search ">
+    <form method="get" class="" action="{:U('Shop/Product/search2')}">
         <select name="searchType" style="display: none;margin-left:0.3rem;height:0.8rem;width:1.5rem;">
             <option value="1" selected="selected">商品</option>
             <option value="2">店铺</option>
         </select>
-        <input style="font-size:0.4rem;height: 0.8rem;width:80%;" placeholder="搜索关键词"/>
-        <button style="font-size:0.5rem; margin-left:-0.14rem; height: 0.8rem;background:#62D666; width:1.5rem; border: none;" ><i class="am-icon-search"></i></button>
+        <input name="q" class="q" style="font-size:0.4rem;height: 0.8rem;text-indent:10px;width:80%;" placeholder="搜索关键词"/>
+        <button type="button" onclick="search2();" style="font-size:0.5rem; margin-left:-0.14rem; height: 0.8rem;background:#62D666; width:1.5rem; border: none;" ><i class="am-icon-search"></i></button>
     </form>
 </div>
 	<div data-am-widget="slider" class="am-slider am-slider-a5" data-am-slider='{&quot;directionNav&quot;:false}'>
@@ -494,6 +494,11 @@
 		</div>
 		
 	<script type="text/javascript">
+        function search2(){
+           var q =  $(".div_search .q").val();
+            window.location.href='{:U('Shop/Product/search2')}'+'?q='+q;
+
+        }
         $(function() {
 
             $(".js_countdown").each(function(index,item){

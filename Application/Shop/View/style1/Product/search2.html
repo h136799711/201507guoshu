@@ -36,6 +36,14 @@
 			  padding: 4px;
 			  border-right: 0px;
 		}
+
+        .filter select{
+            width: 64px;
+            font-size: 12px;
+            height: 30px;
+            padding: 4px;
+            border-right: 0px;
+        }
 		
 		.header .search-wrp{
   padding: 8px 56px 8px 74px;
@@ -168,9 +176,8 @@
 	<div class="header">
 		<div class="am-topbar am-topbar-default">
 				<form class="am-form">
-				<select name="type">
+				<select name="type" >
 					<option value="1" <eq name="type" value="2">selected="selected"</eq> >商品</option>
-					<!--<option value="2" <eq name="type" value="2">selected="selected"</eq> >店铺</option>-->
 				</select>
 				<div class="search-wrp">
 					<input type="text" class="am-form-control" value="{$q}" name="q" placeholder="搜索关键词" />
@@ -183,8 +190,8 @@
 	
 		
 		<!--<a class="am-fl <eq name="sort" value="s">active</eq>" href="{:U('Shop/Product/search2',array('sort'=>'s','layout'=>$layout))}">综合</a>-->
-		<select class="am-fl" name="g_id" onchange="changeType(this.value)" style="margin-top:0.6rem; margin-left: 0.7rem; border: none;background:#EEFFF1;font-size: 0.5rem;padding: 0.2rem;">
-			<option value="0" 
+		<select class="am-fl" style="padding:5px;width: 80px;" name="g_id" onchange="changeType(this.value)" >
+            <option value="0"
 			<eq name="g_id" value="0">
 				selected="selected"
 			</eq>
